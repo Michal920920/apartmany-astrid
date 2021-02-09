@@ -4,51 +4,48 @@
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
 
+const linkResolver = require('./src/utils/linkResolver');
+
 module.exports = {
-	/* Your site config here */
-	plugins: [
+	siteMetadata: {
+		title      : 'Apartmány Astrid | Mikulov',
+		description: 'Learn how to integrate Prismic into your Gatsby project.',
+	},
+	plugins     : [
 		`gatsby-plugin-sass`,
 		{
 			resolve: 'gatsby-source-prismic',
 			options: {
-				repositoryName             : 'testuju-prismic',
-				accessToken                : 'MC5ZQ0JKT2hJQUFDTUFOcVFl.JO-_vV0Xe--_vTMg77-9Ku-_vUjvv71D77-977-977-977-977-9JVHvv73vv71-b--_ve-_ve-_ve-_vQQsFw',
-				releaseID                  : 'YB8FRxIAACAAMRN5',
-				linkResolver               : ({node, key, value}) => (doc) => {
-					// Your link resolver
+				repositoryName: 'apartmany-astrid',
+				linkResolver  : () => (doc) => linkResolver(doc),
+				//accessToken                : 'MC5ZQ0JKT2hJQUFDTUFOcVFl.JO-_vV0Xe--_vTMg77-9Ku-_vUjvv71D77-977-977-977-977-9JVHvv73vv71-b--_ve-_ve-_ve-_vQQsFw',
+				//releaseID                  : 'YB8FRxIAACAAMRN5',
+				schemas: {
+					homepage: require('./custom_types/homepage.json'),
 				},
-				fetchLinks                 : [
-					// Your list of links
-				],
-				htmlSerializer             : ({node, key, value}) => (
-					type,
-					element,
-					content,
-					children,
-				) => {
-					// Your HTML serializer
-				},
-				schemas                    : {
-					homepage: require('./src/schemas/homepage.json'),
-				},
-				lang                       : '*',
-				prismicToolbar             : true,
-				shouldDownloadImage        : ({node, key, value}) => {
-					// Return true to download the image or false to skip.
-				},
-				imageImgixParams           : {
-					auto: 'compress,format',
-					fit : 'max',
-					q   : 50,
-				},
-				imagePlaceholderImgixParams: {
-					w   : 100,
-					blur: 15,
-					q   : 50,
-				},
-				typePathsFilenamePrefix    :
-					'prismic-typepaths---testuju-prismic',
 			},
 		},
+		//'gatsby-plugin-react-helmet',
+		//'gatsby-transformer-sharp',
+		//'gatsby-plugin-sharp',
+		//{
+		//	resolve: 'gatsby-plugin-manifest',
+		//	options: {
+		//		icon: 'src/images/favicon.png',
+		//	},
+		//},
+		//{
+		//	resolve: 'gatsby-source-filesystem',
+		//	options: {
+		//		name: 'images',
+		//		path: `${__dirname}/src/images`,
+		//	},
+		//},
+		//{
+		//	resolve: 'gatsby-plugin-google-fonts',
+		//	options: {
+		//		fonts: [`Lato\:400,400,700,700i,900`, `Amiri\:400,400,700,700i`],
+		//	},
+		//},
 	],
 }

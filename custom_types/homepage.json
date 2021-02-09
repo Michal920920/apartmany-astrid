@@ -1,0 +1,124 @@
+{
+  "Main": {
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading1",
+        "label": "Nadpis",
+        "placeholder": "Hlavní nadpis"
+      }
+    },
+    "sub_title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading2",
+        "label": "Menší titulek",
+        "placeholder": "Zobrazuje se nad nadpisem, max 1 věta"
+      }
+    },
+    "button_1": {
+      "type": "Link",
+      "config": {
+        "label": "Tlačítko s odkazem",
+        "placeholder": "Tlačítko 1"
+      }
+    },
+    "button_2": {
+      "type": "Link",
+      "config": {
+        "label": "Tlačítko s odkazem",
+        "placeholder": "Tlačítko 2"
+      }
+    },
+    "image_slider": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "image": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [],
+              "label": "image"
+            }
+          }
+        },
+        "label": "Prezentace obrázků"
+      }
+    }
+  },
+  "O nás": {
+    "ab_small_title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading6",
+        "label": "Malý titulek",
+        "placeholder": "Zobrazuje se nad nadpisem"
+      }
+    },
+    "ab_title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading2",
+        "label": "Nadpis",
+        "placeholder": "Nadpis sekce"
+      }
+    },
+    "ab_text": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph, preformatted, heading3, heading4, heading5, heading6, strong, em, hyperlink, list-item, o-list-item",
+        "label": "Text",
+        "placeholder": "Delší text"
+      }
+    },
+    "ab_backgroud_image": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Obrázek v pozadí"
+      }
+    },
+    "ab_columns": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "ab_column_icon": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [],
+              "label": "Ikona"
+            }
+          },
+          "ab_column_image": {
+            "type": "Image",
+            "config": {
+              "constraint": {},
+              "thumbnails": [],
+              "label": "Obrázek"
+            }
+          },
+          "ab_column_title": {
+            "type": "StructuredText",
+            "config": {
+              "single": "heading3",
+              "label": "Titulek",
+              "placeholder": "Kratší titulek"
+            }
+          },
+          "ab_column_text": {
+            "type": "StructuredText",
+            "config": {
+              "multi": "paragraph, preformatted, strong, em, hyperlink, list-item, o-list-item",
+              "label": "Text",
+              "placeholder": "Kratší text"
+            }
+          }
+        },
+        "label": "Levé sloupce"
+      }
+    }
+  }
+}
