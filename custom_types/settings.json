@@ -1,0 +1,34 @@
+{
+  "Main": {
+    "head_title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph",
+        "label": "Text v hlavičce",
+        "placeholder": "Zobrazuje se např. v tabu v prohlížeči"
+      }
+    },
+    "logo_image": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Logo"
+      }
+    },
+    "phone": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph",
+        "label": "Číslo telefonu"
+      }
+    },
+    "email": {
+      "type": "StructuredText",
+      "config": {
+        "single": "paragraph",
+        "label": "Email"
+      }
+    }
+  }
+}

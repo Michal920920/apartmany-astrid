@@ -1,0 +1,138 @@
+header
+	//max-width: 1400px
+	//display: grid
+	//grid-template-columns: 1fr 1fr 1fr
+	//grid-template-areas: 'lft cnt rgt'
+	//height: 100px
+	//margin: 0 auto
+	//padding: 0 24px
+	//align-items: center
+
+	.lft
+		display: grid
+		grid-template-columns: repeat(auto-fill, minmax(70px, 1fr))
+		grid-area: lft
+		text-align: center
+		column-gap: 12px
+		align-items: center
+		font-weight: bold
+		font-size: 16px
+		color: #474747
+
+	.cnt
+		display: flex
+		justify-content: center
+		grid-area: cnt
+
+		img
+			width: 200px
+
+	.rgt
+		display: grid
+		grid-template-columns: max-content max-content
+		justify-content: end
+		column-gap: 32px
+		grid-area: rgt
+
+		.wrp
+			display: grid
+			align-items: center
+			grid-template-columns: 40px 1fr
+			grid-template-rows: 25px 25px
+			grid-template-areas: 'icon text' 'icon link'
+
+		svg
+			grid-area: icon
+			grid-row: 1/3
+
+		p
+			grid-area: text
+			margin: 0
+			font-size: 14px
+			font-weight: 500
+			color: #808080
+
+		a
+			grid-area: link
+			font-size: 16px
+			font-family: 'Old Standard TT'
+
+.headerImage
+	width: 6rem
+	height: 6rem
+
+.headerHomeImage
+	width: 8rem
+	height: 8rem
+
+.backToHome
+	margin: 3rem 0 0
+
+.container
+	.header
+		height: 100px
+		display: grid
+		align-items: center
+		padding: 0 24px
+		grid-template-columns: 1fr 1fr 1fr
+		grid-template-areas: 'lft cnt rgt'
+
+		.lft
+			display: grid
+			grid-template-columns: repeat(auto-fill, minmax(70px, 1fr))
+			grid-area: lft
+			text-align: center
+			column-gap: 12px
+			align-items: center
+			font-weight: bold
+			font-size: 16px
+			color: #474747
+
+		.cnt
+			display: flex
+			justify-content: center
+			grid-area: cnt
+
+			img
+				width: 170px
+
+		.rgt
+			display: grid
+			grid-template-columns: max-content max-content
+			justify-content: end
+			column-gap: 32px
+			grid-area: rgt
+
+			.wrp
+				display: grid
+				align-items: center
+				grid-template-columns: 40px 1fr
+				grid-template-rows: 25px 25px
+				grid-template-areas: 'icon text' 'icon link'
+
+			svg
+				grid-area: icon
+				grid-row: 1/3
+
+			p
+				grid-area: text
+				margin: 0
+				font-size: 14px
+				font-weight: 500
+				color: #808080
+
+			a
+				grid-area: link
+				font-size: 16px
+				font-family: 'Old Standard TT'
+
+.headerImage
+	width: 6rem
+	height: 6rem
+
+.headerHomeImage
+	width: 8rem
+	height: 8rem
+
+.backToHome
+	margin: 3rem 0 0

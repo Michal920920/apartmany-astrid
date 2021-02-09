@@ -16,18 +16,27 @@
         "placeholder": "Zobrazuje se nad nadpisem, max 1 věta"
       }
     },
-    "button_1": {
-      "type": "Link",
+    "buttons": {
+      "type": "Group",
       "config": {
-        "label": "Tlačítko s odkazem",
-        "placeholder": "Tlačítko 1"
-      }
-    },
-    "button_2": {
-      "type": "Link",
-      "config": {
-        "label": "Tlačítko s odkazem",
-        "placeholder": "Tlačítko 2"
+        "fields": {
+          "button_1_text": {
+            "type": "StructuredText",
+            "config": {
+              "multi": "paragraph",
+              "label": "Text",
+              "placeholder": "Text na tlačítku"
+            }
+          },
+          "button_1_link": {
+            "type": "Link",
+            "config": {
+              "label": "Odkaz",
+              "placeholder": "Odkaz"
+            }
+          }
+        },
+        "label": "Tlačítka"
       }
     },
     "image_slider": {
