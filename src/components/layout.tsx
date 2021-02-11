@@ -47,11 +47,11 @@ export default function Layout({children, data}) {
 						<ul id="nav-mobile" className="right hide-on-med-and-down">
 							<li>
 								<p>Telefonní kontakt</p>
-								<a href="tel:{data.head_title}">{data.phone}</a>
+								<a href={'callto:' + data.phone}>{data.phone}</a>
 							</li>
 							<li>
 								<p>Emailová adresa</p>
-								<a href="`mailto:${data.email}`">{data.email}</a>
+								<a href={'mailto:' + data.email}>{data.email}</a>
 							</li>
 						</ul>
 					</div>
@@ -69,3 +69,4 @@ export default function Layout({children, data}) {
 
 	)
 }
+
