@@ -10,8 +10,7 @@ const bannerposts = [
 	{img: img2},
 ];
 
-const Banner = (data) => {
-	console.log('data', data);
+const Banner = ({data}) => {
 	const settings = {
 		slidesToShow  : 1,
 		slidesToScroll: 1,
@@ -28,8 +27,8 @@ const Banner = (data) => {
 				<div className="row align-items-center">
 					<div className="col-lg-6 col-md-6">
 						<div className="banner-content">
-							<span className="promo-tag wow fadeInDown" data-wow-delay=".3s">{data.data.sub_title}</span>
-							<h1 className="title wow fadeInLeft" data-wow-delay=".5s"> {data.data.title}
+							<span className="promo-tag wow fadeInDown" data-wow-delay=".3s">{data.sub_title}</span>
+							<h1 className="title wow fadeInLeft" data-wow-delay=".5s"> {data.title}
 							</h1>
 							<ul>
 								<li>
@@ -46,7 +45,7 @@ const Banner = (data) => {
 					<div className="col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="0.5s">
 						<div className="banner-thumb d-none d-md-block">
 							<Slider className="hero-slider-one" {...settings}>
-								{data.data.image_slider.map((item, i) => (
+								{data.image_slider.map((item, i) => (
 									<div key={i} className="single-thumb">
 										<img src={item.image.url} alt={item.image.alt}/>
 									</div>

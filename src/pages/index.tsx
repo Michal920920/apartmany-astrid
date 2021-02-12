@@ -1,8 +1,6 @@
 import * as React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-import ReactDOM from 'react-dom';
-// import App from './App';
 import {BrowserRouter} from 'react-router-dom';
 // import * as serviceWorker from './serviceWorker';
 
@@ -17,25 +15,32 @@ import './../assets/css/flaticon.css';
 import './../assets/fonts/flaticon/flaticon-2.css';
 import './../assets/css/default.css';
 import './../assets/css/style.css';
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Facilities from "./../sections/homepage/Facilities";
+import Blogpost from "./../sections/homepage/Blogpost";
+import Features from "./../sections/homepage/Features";
 import Preloader from "./../components/Preloader";
 import {graphql} from "gatsby";
 import {Suspense} from "react";
 import {getHomepageData} from "../models/repository/homepageRepository";
 
-
-const Home = React.lazy(() => import("./Homepage"));
-
-export default function Index({data}) {
+const Index = ({data}) => {
+	if (!data) return null;
 	const homepageData = getHomepageData(data.allPrismicHomepage.edges[0].node.data);
+	const Homepage = React.lazy(() => import("./../sections/homepage")); // Lazy-loaded
+
+	// const document = data.allPrismicSettings.edges[0].node.data
 	return (
-		<Router>
-			<Suspense fallback={<div></div>}>
-				<Preloader/>
-				<Switch>
-					<Route exact path="/" component={() => <Home data={homepageData}/>}/>
-				</Switch>
-			</Suspense>
-		</Router>
+		<Suspense fallback={<Preloader/>}>
+			{/*<Header/>*/}
+			<Homepage data={homepageData}/>
+			{/*<Banner/>*/}
+			{/*<Facilities/>*/}
+			{/*<Blogpost/>*/}
+			{/*<Features/>*/}
+			{/*<Footer/>*/}
+		</Suspense>
 	)
 }
 
@@ -45,7 +50,7 @@ export default function Index({data}) {
 // serviceWorker.unregister();
 
 export const query = graphql`
-    query MyQuery {
+    query HomepageQuery {
         allPrismicHomepage {
             edges {
                 node {
@@ -64,35 +69,75 @@ export const query = graphql`
                                 thumbnails
                             }
                         }
-                    }
-                }
-            }
-        },
-        allPrismicSettings {
-            edges {
-                node {
-                    dataRaw {
-                        email {
-                            text
-                        }
-                        head_title {
-                            text
-                        }
-                        logo_image {
+                        ab_backgroud_image {
                             alt
                             url
-                            dimensions {
-                                height
-                                width
+                        }
+                        ab_columns {
+                            ab_column_icon {
+                                alt
+                                url
+                            }
+                            ab_column_image {
+                                alt
+                                url
+                            }
+                            ab_column_text {
+                                text
+                            }
+                            ab_column_title {
+                                text
                             }
                         }
-                        phone {
+                        ab_small_title {
                             text
+                        }
+                        ab_text {
+                            text
+                        }
+                        ab_title {
+                            text
+                        }
+                        buttons {
+                            button_1_link {
+                                url
+                            }
+                            button_1_text {
+                                text
+                            }
                         }
                     }
                 }
             }
         }
     }
+    #    query SettingsQuery {
+    #        allPrismicSettings {
+    #            edges {
+    #                node {
+    #                    dataRaw {
+    #                        email {
+    #                            text
+    #                        }
+    #                        head_title {
+    #                            text
+    #                        }
+    #                        logo_image {
+    #                            alt
+    #                            url
+    #                            dimensions {
+    #                                height
+    #                                width
+    #                            }
+    #                        }
+    #                        phone {
+    #                            text
+    #                        }
+    #                    }
+    #                }
+    #            }
+    #        }
+    #    }
 
 `
+export default Index;
