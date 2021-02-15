@@ -4,7 +4,7 @@ import {Link} from "gatsby"
 import Backtotop from './Backtotop';
 import ReactMapboxGl, {Layer, Feature} from 'react-mapbox-gl';
 
-import logo from '../assets/img/footer-logo.png';
+//import logo from '../assets/img/footer-logo.png';
 
 class Footer extends Component {
 	render() {
@@ -59,7 +59,7 @@ class Footer extends Component {
 									{/* Site Info Widget */}
 									<div className="widget site-info-widget mb-50">
 										<div className="footer-logo mb-50">
-											<img src={logo} alt=""/>
+											{/*<img src={logo} alt=""/>*/}
 										</div>
 										<p>
 											Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed doing eius mod

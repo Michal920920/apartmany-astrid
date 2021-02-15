@@ -1,56 +1,47 @@
 import * as React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-
-import {BrowserRouter} from 'react-router-dom';
+import {Suspense} from 'react';
+import {graphql} from "gatsby";
 // import * as serviceWorker from './serviceWorker';
 
 // Css
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../../node_modules/slick-carousel/slick/slick.css';
 import '../../node_modules/slick-carousel/slick/slick-theme.css';
-import '../../node_modules/animate.css/animate.css';
-import '../../node_modules/magnific-popup/dist/magnific-popup.css';
+// import '../../node_modules/animate.css/animate.css';
+// import '../../node_modules/magnific-popup/dist/magnific-popup.css';
 import './../assets/css/font-awesome.min.css';
 import './../assets/css/flaticon.css';
 import './../assets/fonts/flaticon/flaticon-2.css';
 import './../assets/css/default.css';
 import './../assets/css/style.css';
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Facilities from "./../sections/homepage/Facilities";
-import Blogpost from "./../sections/homepage/Blogpost";
-import Features from "./../sections/homepage/Features";
-import Preloader from "./../components/Preloader";
-import {graphql} from "gatsby";
-import {Suspense} from "react";
-import {getHomepageData} from "../models/repository/homepageRepository";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+// import Homepage from "../sections/Homepage";
+import Layout from "../components/layout";
+import {getHomepageData} from "../models/dataManager/PrismicDataSource";
+import {BrowserRouter as Router} from "react-router-dom";
+import Preloader from "../components/Preloader";
+
+// Preloader
+// const Preloader = React.lazy(() => import("../components/Preloader"));
+
+// Pages
 
 const Index = ({data}) => {
-	if (!data) return null;
-	const homepageData = getHomepageData(data.allPrismicHomepage.edges[0].node.data);
-	const Homepage = React.lazy(() => import("./../sections/homepage")); // Lazy-loaded
-
-	// const document = data.allPrismicSettings.edges[0].node.data
+	if (!data) {
+		return null;
+	}
+	const Homepage = React.lazy(() => import("../sections/Homepage"));
+	const homeData = getHomepageData(data.allPrismicHomepage.edges[0].node.data);
+	AOS.init();
 	return (
-		<Suspense fallback={<Preloader/>}>
-			{/*<Header/>*/}
-			<Homepage data={homepageData}/>
-			{/*<Banner/>*/}
-			{/*<Facilities/>*/}
-			{/*<Blogpost/>*/}
-			{/*<Features/>*/}
-			{/*<Footer/>*/}
-		</Suspense>
+		<Layout>
+			<Homepage data={homeData}/>
+		</Layout>
 	)
 }
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();
-
 export const query = graphql`
-    query HomepageQuery {
+    query MyQuery {
         allPrismicHomepage {
             edges {
                 node {
@@ -111,33 +102,6 @@ export const query = graphql`
             }
         }
     }
-    #    query SettingsQuery {
-    #        allPrismicSettings {
-    #            edges {
-    #                node {
-    #                    dataRaw {
-    #                        email {
-    #                            text
-    #                        }
-    #                        head_title {
-    #                            text
-    #                        }
-    #                        logo_image {
-    #                            alt
-    #                            url
-    #                            dimensions {
-    #                                height
-    #                                width
-    #                            }
-    #                        }
-    #                        phone {
-    #                            text
-    #                        }
-    #                    }
-    #                }
-    #            }
-    #        }
-    #    }
 
 `
 export default Index;
