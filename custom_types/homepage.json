@@ -96,7 +96,10 @@
           "ab_column_icon": {
             "type": "Image",
             "config": {
-              "constraint": {},
+              "constraint": {
+                "width": 70,
+                "height": 70
+              },
               "thumbnails": [],
               "label": "Ikona"
             }
@@ -104,7 +107,10 @@
           "ab_column_image": {
             "type": "Image",
             "config": {
-              "constraint": {},
+              "constraint": {
+                "width": 270,
+                "height": 300
+              },
               "thumbnails": [],
               "label": "Obrázek"
             }
@@ -127,6 +133,90 @@
           }
         },
         "label": "Levé sloupce"
+      }
+    }
+  },
+  "Apartmány": {
+    "ap_main_subtitle": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading3",
+        "label": "Podnadpis"
+      }
+    },
+    "ap_main_title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading2",
+        "label": "Název",
+        "placeholder": "Nadpis"
+      }
+    },
+    "apartments": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "ap_image": {
+            "type": "Image",
+            "config": {
+              "constraint": {
+                "width": 260,
+                "height": 185
+              },
+              "thumbnails": [],
+              "label": "Obrázek"
+            }
+          },
+          "ap_title": {
+            "type": "StructuredText",
+            "config": {
+              "single": "heading3",
+              "label": "Název",
+              "placeholder": "Název apartmánu"
+            }
+          },
+          "ap_sub_title": {
+            "type": "StructuredText",
+            "config": {
+              "single": "heading6",
+              "label": "Popisek",
+              "placeholder": "Popis apartmánu"
+            }
+          },
+          "ap_price": {
+            "type": "StructuredText",
+            "config": {
+              "single": "heading4",
+              "label": "Cena",
+              "placeholder": "např. 1000Kč/noc"
+            }
+          }
+        },
+        "label": "Apartmány"
+      }
+    }
+  },
+  "Ocenění": {
+    "aw_text": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading2",
+        "label": "Text"
+      }
+    },
+    "aw_background": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Pozadí"
+      }
+    },
+    "aw_link": {
+      "type": "Link",
+      "config": {
+        "label": "Odkaz",
+        "placeholder": "Odkaz na booking"
       }
     }
   }

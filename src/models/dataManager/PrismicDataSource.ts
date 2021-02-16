@@ -2,10 +2,14 @@ import {RichText} from 'prismic-reactjs'
 import {graphql, useStaticQuery} from "gatsby";
 import {TAbout} from "../../sections/Homepage/About";
 import {TMain} from "../../sections/Homepage/Banner";
+import {TApartments} from "../../sections/Homepage/Apartments";
+import {TAwards} from "../../components/Awards";
 
 export type THomepage = {
-	main: TMain
-	about: TAbout
+	main: TMain,
+	about: TAbout,
+	apartments: TApartments
+	awards: TAwards
 }
 
 export type TSettings = {
@@ -21,8 +25,8 @@ export type TSettings = {
 export function getHomepageData(data): THomepage {
 	return {
 		main: {
-			title: RichText.asText(data.title.raw),
-			sub_title: RichText.asText(data.sub_title.raw),
+			title: data.title.text,
+			sub_title: data.sub_title.text,
 			image_slider: data.image_slider,
 		},
 		about: {
@@ -38,6 +42,23 @@ export function getHomepageData(data): THomepage {
 					title: item.ab_column_title.text
 				}
 			})
+		},
+		apartments: {
+			main_subtitle: data.ap_main_subtitle.text,
+			main_title: data.ap_main_title.text,
+			apartments: data.apartments.map((item) => {
+				return {
+					image: item.ap_image.url,
+					price: item.ap_price.text,
+					title: item.ap_title.text,
+					sub_title: item.ap_sub_title.text,
+				}
+			})
+		},
+		awards: {
+			image_url: data.aw_background.url,
+			link: data.aw_link.url,
+			title: data.aw_text.text,
 		}
 	};
 }

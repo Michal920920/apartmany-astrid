@@ -34,29 +34,35 @@ class About extends React.Component<{ data: TAbout }> {
 						<div className="col-lg-6 col-md-10" data-aos="fade-right" data-aos-offset="80">
 							<ResponsiveMasonry columnsCountBreakPoints={{350: 1, 750: 2}}>
 								<Masonry gutter="10px" className="col about-features-boxes fetaure-masonary">
-									{data.columns.map((item, id) => (
-											<div key={id}>
-												<div>
-													<div className="single-feature-box">
-														<div style={{
-															width: '70px',
-															height: '70px',
-															margin: '0 auto',
-															background: "url(" + item.icon_url + ") no-repeat"
-														}}></div>
-														<h4><Link to="#">{item.title}</Link></h4>
-														<p>
-															{item.text}
-														</p>
+									{data.columns.map((item, id) => {
+											let odd = true;
+											if (id % 2 === 0) {
+												odd = false;
+											}
+											return (
+												<div key={id}>
+													<div>
+														<div className={`single-feature-box ${odd ? 'dark' : ''}`}>
+															<div style={{
+																width: '70px',
+																height: '70px',
+																margin: '0 auto',
+																background: "url(" + item.icon_url + ") no-repeat"
+															}}></div>
+															<h4>{item.title}</h4>
+															<p>
+																{item.text}
+															</p>
+														</div>
+													</div>
+													<div>
+														<div className="single-feature-box only-bg mt-30"
+														     style={{background: "url(" + item.image_url + ") no-repeat"}}>
+														</div>
 													</div>
 												</div>
-												<div>
-													<div className="single-feature-box only-bg mt-30"
-													     style={{background: "url(" + item.image_url + ") no-repeat"}}>
-													</div>
-												</div>
-											</div>
-										)
+											)
+										}
 									)
 									}
 								</Masonry>

@@ -1,14 +1,13 @@
 import * as React from 'react';
 import {Suspense} from 'react';
 import {Helmet} from "react-helmet";
-import {graphql, Link, useStaticQuery} from "gatsby"
 import {getSettingData, TSettings} from "../models/dataManager/PrismicDataSource";
 import Footer from "../components/Footer";
 import {Header} from "./Header";
 import Preloader from "./Preloader";
 
 export default function Layout({children}) {
-	const data:TSettings = getSettingData();
+	const data: TSettings = getSettingData();
 	return (
 		<Suspense fallback={<Preloader/>}>
 			<Helmet>

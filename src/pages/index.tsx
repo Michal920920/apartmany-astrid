@@ -47,10 +47,10 @@ export const query = graphql`
                 node {
                     data {
                         sub_title {
-                            raw
+                            text
                         }
                         title {
-                            raw
+                            text
                         }
                         image_slider {
                             image {
@@ -97,11 +97,39 @@ export const query = graphql`
                                 text
                             }
                         }
+                        ap_main_subtitle {
+                            text
+                        }
+                        ap_main_title {
+                            text
+                        }
+                        apartments {
+                            ap_image {
+                                url
+                            }
+                            ap_price {
+                                text
+                            }
+                            ap_sub_title {
+                                text
+                            }
+                            ap_title {
+                                text
+                            }
+                        }
+                        aw_link {
+                            url
+                        }
+                        aw_text {
+                            text
+                        }
+                        aw_background {
+                            url
+                        }
                     }
                 }
             }
         }
     }
-
 `
 export default Index;

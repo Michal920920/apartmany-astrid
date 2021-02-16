@@ -2,13 +2,6 @@ import * as React from 'react';
 import {Link} from "gatsby"
 import Slider from 'react-slick';
 
-// const bannerposts = [
-// 	{img: img1},
-// 	{img: img2},
-// ]
-// ;
-
-
 export type TMain = {
 	title: string,
 	sub_title: string,
@@ -18,7 +11,6 @@ export type TMain = {
 			alt: string
 		}
 	}[]
-
 }
 
 class Banner extends React.Component<{ data: TMain }> {
@@ -45,12 +37,10 @@ class Banner extends React.Component<{ data: TMain }> {
 								</h1>
 								<ul>
 									<li>
-										<Link className="main-btn btn-filled fade-up" to="/contact">take a
-											tour</Link>
+										<Link className="main-btn btn-filled fade-up" to="/contact">{data.sub_title}</Link>
 									</li>
 									<li>
-										<Link className="main-btn btn-border fade-up" to="/about">Learn
-											More</Link>
+										<Link className="main-btn btn-border fade-up" to="/about">{data.sub_title}</Link>
 									</li>
 								</ul>
 							</div>

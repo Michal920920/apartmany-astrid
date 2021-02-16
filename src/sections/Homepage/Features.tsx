@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import * as React from 'react';
 import {Link} from "gatsby"
+import {Component} from "react";
 
 class Features extends Component {
 	render() {
