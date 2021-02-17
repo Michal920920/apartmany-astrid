@@ -7,6 +7,7 @@ import {graphql} from "gatsby";
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../../node_modules/slick-carousel/slick/slick.css';
 import '../../node_modules/slick-carousel/slick/slick-theme.css';
+
 // import '../../node_modules/animate.css/animate.css';
 // import '../../node_modules/magnific-popup/dist/magnific-popup.css';
 import './../assets/css/font-awesome.min.css';
@@ -16,7 +17,6 @@ import './../assets/css/default.css';
 import './../assets/css/style.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-// import Homepage from "../sections/Homepage";
 import Layout from "../components/layout";
 import {getHomepageData} from "../models/dataManager/PrismicDataSource";
 import {BrowserRouter as Router} from "react-router-dom";
@@ -32,7 +32,8 @@ const Index = ({data}) => {
 		return null;
 	}
 	const Homepage = React.lazy(() => import("../sections/Homepage"));
-	const homeData = getHomepageData(data.allPrismicHomepage.edges[0].node.data);
+	const homeData = getHomepageData(data);
+	console.log(homeData);
 	AOS.init();
 	return (
 		<Layout>
@@ -126,6 +127,23 @@ export const query = graphql`
                         aw_background {
                             url
                         }
+                    }
+                }
+            }
+        },
+        allPrismicBlog(limit: 3, sort: {fields: data___blog_date, order: DESC}) {
+            nodes {
+                data {
+                    blog_date
+                    blog_author
+                    blog_title {
+                        text
+                    }
+                    blog_anotation {
+                        text
+                    }
+                    main_image {
+                        url
                     }
                 }
             }

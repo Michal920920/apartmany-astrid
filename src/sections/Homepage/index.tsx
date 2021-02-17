@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-// import Blogpost from "../sections/homepage/Blogpost";
-// import Features from "../sections/homepage/Features";
 import {THomepage} from "../../models/dataManager/PrismicDataSource";
 import Features from "./Features";
 
@@ -13,7 +11,7 @@ const Blogpost = React.lazy(() => import("./Blogpost"));
 
 export default class Homepage extends React.Component<{ data: THomepage }> {
 	render() {
-		const {about, main, apartments, awards} = this.props.data;
+		const {about, main, apartments, awards,blogPostThumbs} = this.props.data;
 		return (
 			<>
 				{/*<section className='introduce'>*/}
@@ -21,7 +19,7 @@ export default class Homepage extends React.Component<{ data: THomepage }> {
 				<About data={about}/>
 				<Facilities data={apartments}/>
 				<Awards data={awards}/>
-				<Blogpost/>
+				<Blogpost data={blogPostThumbs}/>
 				<Features/>
 			</>
 		)

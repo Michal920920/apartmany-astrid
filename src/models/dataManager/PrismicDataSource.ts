@@ -3,13 +3,15 @@ import {graphql, useStaticQuery} from "gatsby";
 import {TAbout} from "../../sections/Homepage/About";
 import {TMain} from "../../sections/Homepage/Banner";
 import {TApartments} from "../../sections/Homepage/Apartments";
-import {TAwards} from "../../components/Awards";
+import {TBlogPostThumb} from "../../sections/Homepage/Blogpost";
+import {TAwards} from "../../sections/Homepage/Awards";
 
 export type THomepage = {
 	main: TMain,
 	about: TAbout,
 	apartments: TApartments
-	awards: TAwards
+	awards: TAwards,
+	blogPostThumbs: TBlogPostThumb[]
 }
 
 export type TSettings = {
@@ -23,18 +25,20 @@ export type TSettings = {
 }
 
 export function getHomepageData(data): THomepage {
+	let hpData = data.allPrismicHomepage.edges[0].node.data
+	let blogData = data.allPrismicBlog.nodes;
 	return {
 		main: {
-			title: data.title.text,
-			sub_title: data.sub_title.text,
-			image_slider: data.image_slider,
+			title: hpData.title.text,
+			sub_title: hpData.sub_title.text,
+			image_slider: hpData.image_slider,
 		},
 		about: {
-			title: data.ab_title.text,
-			sub_title: data.ab_small_title.text,
-			text: data.ab_text.text,
-			background_img: data.ab_backgroud_image,
-			columns: data.ab_columns.map((item) => {
+			title: hpData.ab_title.text,
+			sub_title: hpData.ab_small_title.text,
+			text: hpData.ab_text.text,
+			background_img: hpData.ab_backgroud_image,
+			columns: hpData.ab_columns.map((item) => {
 				return {
 					icon_url: item.ab_column_icon.url,
 					image_url: item.ab_column_image.url,
@@ -44,9 +48,9 @@ export function getHomepageData(data): THomepage {
 			})
 		},
 		apartments: {
-			main_subtitle: data.ap_main_subtitle.text,
-			main_title: data.ap_main_title.text,
-			apartments: data.apartments.map((item) => {
+			main_subtitle: hpData.ap_main_subtitle.text,
+			main_title: hpData.ap_main_title.text,
+			apartments: hpData.apartments.map((item) => {
 				return {
 					image: item.ap_image.url,
 					price: item.ap_price.text,
@@ -56,10 +60,19 @@ export function getHomepageData(data): THomepage {
 			})
 		},
 		awards: {
-			image_url: data.aw_background.url,
-			link: data.aw_link.url,
-			title: data.aw_text.text,
-		}
+			image_url: hpData.aw_background.url,
+			link: hpData.aw_link.url,
+			title: hpData.aw_text.text,
+		},
+		blogPostThumbs: blogData.map((item) => {
+			return {
+				date: item.data.blog_date,
+				author: item.data.blog_author,
+				title: item.data.blog_title.length > 0 ? item.data.blog_title[0].text : '',
+				anotation: item.data.blog_anotation.length > 0 ? item.data.blog_anotation[0].text : '',
+				main_image_url: item.data.main_image.url,
+			}
+		})
 	};
 }
 
