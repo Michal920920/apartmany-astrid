@@ -16,7 +16,7 @@ class Apartments extends React.Component<{ data: TApartments }> {
 	render() {
 		const data = this.props.data;
 		return (
-			<section className="pt-115 pb-115 bg-white">
+			<section className="pt-115 pb-115 bg-white" id="apartments">
 				<div className="container">
 					<div className="section-title text-center mb-30">
 						<span className="title-tag">{data.main_subtitle}</span>

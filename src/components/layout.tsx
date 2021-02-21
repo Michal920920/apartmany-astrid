@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Suspense} from 'react';
 import {Helmet} from "react-helmet";
 import {getSettingData, TSettings} from "../models/dataManager/PrismicDataSource";
-import Footer from "../components/Footer";
+import {Footer} from "./Footer";
 import {Header} from "./Header";
 import Preloader from "./Preloader";
 
@@ -21,7 +21,7 @@ export default function Layout({children}) {
 			</Helmet>
 			<Header data={data}/>
 			{children}
-			<Footer/>
+			<Footer data={data}/>
 		</Suspense>
 
 	)

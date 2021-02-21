@@ -15,25 +15,18 @@ import './../assets/css/flaticon.css';
 import './../assets/fonts/flaticon/flaticon-2.css';
 import './../assets/css/default.css';
 import './../assets/css/style.css';
+import ReactMapboxGl, {Layer, Feature} from 'react-mapbox-gl';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Layout from "../components/layout";
 import {getHomepageData} from "../models/dataManager/PrismicDataSource";
-import {BrowserRouter as Router} from "react-router-dom";
-import Preloader from "../components/Preloader";
-
-// Preloader
 // const Preloader = React.lazy(() => import("../components/Preloader"));
-
-// Pages
-
 const Index = ({data}) => {
 	if (!data) {
 		return null;
 	}
 	const Homepage = React.lazy(() => import("../sections/Homepage"));
 	const homeData = getHomepageData(data);
-	console.log(homeData);
 	AOS.init();
 	return (
 		<Layout>
@@ -145,7 +138,8 @@ export const query = graphql`
                     main_image {
                         url
                     }
-                }
+                },
+                slugs
             }
         }
     }

@@ -1,124 +1,28 @@
 import * as React from 'react';
 import classNames from 'classnames'
 import {Link} from "gatsby"
-import Canvas from "./Canvas";
 import {TSettings} from "../models/dataManager/PrismicDataSource";
 
 const navigationmenu = [
 	{
 		id: 1,
-		linkText: 'Home',
-		child: true,
-		submenu: [
-			{
-				id: 11,
-				link: '/',
-				linkText: 'Home One'
-			},
-			{
-				id: 12,
-				link: '/hometwo',
-				linkText: 'Home Two'
-			},
-			{
-				id: 13,
-				link: '/homethree',
-				linkText: 'Home Three'
-			},
-		]
+		linkText: 'Domů',
+		link: '/',
 	},
 	{
 		id: 2,
-		linkText: 'Apartments',
-		child: true,
-		submenu: [
-			{
-				id: 21,
-				link: '/apartment-details',
-				linkText: 'Apartments Details'
-			},
-			{
-				id: 22,
-				link: '/trending',
-				linkText: 'Apartments List 2'
-			},
-			{
-				id: 23,
-				link: '/apartment-grid',
-				linkText: 'Apartments Grid'
-			},
-			{
-				id: 24,
-				link: '/apartment-list',
-				linkText: 'Apartments List'
-			},
-		]
+		linkText: 'Apartmány',
+		link: '#apartments',
 	},
 	{
 		id: 3,
-		linkText: 'News',
-		child: true,
-		submenu: [
-			{
-				id: 31,
-				link: '/news',
-				linkText: 'News'
-			},
-			{
-				id: 32,
-				link: '/news-details',
-				linkText: 'News Details'
-			},
-		]
+		linkText: 'Novinky',
+		link: '/blog',
 	},
 	{
 		id: 4,
-		linkText: 'Pages',
-		child: true,
-		submenu: [
-			{
-				id: 41,
-				child: true,
-				linkText: 'Places',
-				submenu: [
-					{
-						id: 411,
-						link: '/places',
-						linkText: 'Places Near By'
-					},
-					{
-						id: 412,
-						link: '/places-details',
-						linkText: 'Places Details'
-					},
-				]
-			},
-			{
-				id: 42,
-				link: '/classification',
-				linkText: 'Classification'
-			},
-			{
-				id: 43,
-				link: '/gallery',
-				linkText: 'Our Gallery'
-			},
-			{
-				id: 44,
-				link: '/contact',
-				linkText: 'Contact Us'
-			},
-			{
-				id: 45,
-				link: '/about',
-				linkText: 'About Us'
-			},
-			{
-				id: 46,
-				link: '/broker',
-				linkText: 'Brokers'
-			},
-		]
+		linkText: 'O nás',
+		link: '#about',
 	},
 ]
 type State = {
@@ -183,23 +87,6 @@ export class Header extends React.Component<Props, State> {
 		}, false);
 	}
 
-	// getNextSibling = function (elem, selector: string): Element {
-	// 	let sibling = elem.nextElementSibling;
-	// 	if (!selector) return sibling;
-	// 	while (sibling) {
-	// 		if (sibling.matches(selector)) return sibling;
-	// 		sibling = sibling.nextElementSibling
-	// 	}
-	// }
-	// triggerChild = (e) => {
-	// 	let subMenu = '';
-	// 	console.log('triggerChild');
-	// 	subMenu = (this.getNextSibling(e.target, '.submenu') !== undefined) ? this.getNextSibling(e.target, '.submenu') : null;
-	// 	if (subMenu !== null && subMenu !== undefined) {
-	// 		subMenu.classList.value = subMenu.classList.contains('d-block') ? 'submenu' : 'submenu d-block';
-	// 	}
-	// }
-
 	render() {
 		const className: string = this.state.isMobile ? 'breakpoint-on' : '';
 		const classNamess: string = this.state.isMobile ? 'd-none' : '';
@@ -216,35 +103,12 @@ export class Header extends React.Component<Props, State> {
 								<div className="navbar-close" onClick={this.toggleClass}>
 									<div className="cross-wrap"><span className="top"/><span className="bottom"/></div>
 								</div>
-								{/* Off canvas Menu  */}
-								<div className="toggle">
-									<Link to="#" id="offCanvasBtn" onClick={this.addClass}><i className="fal fa-bars"/></Link>
-								</div>
 								{/* Mneu Items */}
 								<div className="menu-items">
 									<ul>
 										{navigationmenu.length > 0 ? navigationmenu.map((item, i) => (
-											<li key={i} className={`menu-item ${item.child ? 'menu-item-has-children' : ''} `}>
-												{item.child ? <Link onClick={e => e.preventDefault()} to="/"> {item.linkText} </Link> : <Link to={'ahoj'}> {item.linkText} </Link>}
-												{item.child ?
-													<ul className="submenu" role="menu">
-														{item.submenu.map((sub_item, i) => (
-															<li key={i} className={`menu-item ${sub_item.child ? 'menu-item-has-children' : ''} `}>
-																{sub_item.child ? <Link onClick={e => e.preventDefault()} to="/"> {sub_item.linkText} </Link> :
-																	<Link to={sub_item.link}> {sub_item.linkText} </Link>}
-																{sub_item.submenu ?
-																	<ul className="submenu">
-																		{sub_item.submenu.map((third_item, i) => (
-																			<li key={i}><Link
-																				to={third_item.link}>{third_item.linkText}</Link>
-																			</li>
-																		))}
-																	</ul> : null}
-															</li>
-														))}
-													</ul>
-													: null
-												}
+											<li key={i} className="menu-item">
+												<Link to={item.link}>{item.linkText}</Link>
 											</li>
 										)) : null}
 									</ul>
@@ -283,13 +147,6 @@ export class Header extends React.Component<Props, State> {
 						</div>
 					</div>
 				</header>
-				<div className={classNames("offcanvas-wrapper", {"show-offcanvas": this.state.classMethod})}>
-					<div className={classNames("offcanvas-overly", {"show-overly": this.state.classMethod})} onClick={this.removeClass}/>
-					<div className="offcanvas-widget">
-						<Link to="#" className="offcanvas-close" onClick={this.removeClass}><i className="fal fa-times"/></Link>
-						<Canvas/>
-					</div>
-				</div>
 			</>
 		);
 	}

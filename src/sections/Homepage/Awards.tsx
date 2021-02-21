@@ -24,7 +24,7 @@ class Awards extends React.Component<{ data: TAwards }> {
 						<div className='parallax_text'>
 							<img alt='trophy_icon' src={icon}/>
 							<h3>{data.title}</h3>
-							<Link to={data.link}>booking.com</Link>
+							<a href={data.link}>booking.com</a>
 						</div>
 					</div>
 				</Parallax>

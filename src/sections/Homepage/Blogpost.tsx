@@ -1,17 +1,16 @@
 import * as React from 'react';
 import {Link} from "gatsby"
-import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import moment from "moment";
-
+import moment from 'moment';
 
 export type TBlogPostThumb = {
 	date: string,
 	author: string,
 	title: string,
 	anotation: string,
-	main_image_url: string
+	main_image_url: string,
+	url: string,
 }
 type Props = {}
 
@@ -63,8 +62,8 @@ class Blogpost extends React.Component<{ data: TBlogPostThumb[] }> {
 			<section className="latest-news pt-115 pb-115">
 				<div className="container">
 					<div className="section-title text-center">
-						<span className="title-tag">aktuality</span>
-						<h2>Blog</h2>
+						<span className="title-tag">Blog</span>
+						<h2>Poslední příspěvky</h2>
 					</div>
 					{/* Latest post loop */}
 					<div className="row justify-content-center mt-50">

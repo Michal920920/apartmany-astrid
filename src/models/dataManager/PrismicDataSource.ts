@@ -1,10 +1,13 @@
-import {RichText} from 'prismic-reactjs'
+import {RichText, RichTextBlock} from 'prismic-reactjs'
 import {graphql, useStaticQuery} from "gatsby";
 import {TAbout} from "../../sections/Homepage/About";
 import {TMain} from "../../sections/Homepage/Banner";
 import {TApartments} from "../../sections/Homepage/Apartments";
 import {TBlogPostThumb} from "../../sections/Homepage/Blogpost";
 import {TAwards} from "../../sections/Homepage/Awards";
+import {ReactNode} from "react";
+
+var PrismicDOM = require('prismic-dom');
 
 export type THomepage = {
 	main: TMain,
@@ -21,7 +24,10 @@ export type TSettings = {
 		alt: string,
 		url: string,
 	},
+	address: RichTextBlock[],
 	phone: string,
+	blog_list_image: string,
+	blog_list_title: string,
 }
 
 export function getHomepageData(data): THomepage {
@@ -71,11 +77,32 @@ export function getHomepageData(data): THomepage {
 				title: item.data.blog_title.length > 0 ? item.data.blog_title[0].text : '',
 				anotation: item.data.blog_anotation.length > 0 ? item.data.blog_anotation[0].text : '',
 				main_image_url: item.data.main_image.url,
+				url: item.slugs[0],
 			}
 		})
 	};
 }
 
+export type TBlogList = {
+	blogPostThumbs: TBlogPostThumb[]
+}
+
+export function getBlogListData(data): TBlogList | null {
+	let blogData = data.allPrismicBlog.edges;
+
+	return {
+		blogPostThumbs: blogData.map((item) => {
+			return {
+				date: item.node.data.blog_date,
+				author: item.node.data.blog_author,
+				title: item.node.data.blog_title.length > 0 ? item.node.data.blog_title[0].text : '',
+				anotation: item.node.data.blog_anotation.length > 0 ? item.node.data.blog_anotation[0].text : '',
+				main_image_url: item.node.data.main_image.url,
+				url: item.node.slugs[0],
+			}
+		}),
+	};
+}
 
 export function getSettingData(): TSettings | null {
 	let data = useStaticQuery(graphql`
@@ -97,6 +124,21 @@ export function getSettingData(): TSettings | null {
                             phone {
                                 text
                             }
+                            blog_list_image {
+                                url
+                            }
+                            blog_list_title {
+                                text
+                            }
+                            address {
+                                type
+                                text
+                                spans {
+                                    start
+                                    end
+                                    type
+                                }
+                            }
                         }
                     }
                 }
@@ -108,7 +150,6 @@ export function getSettingData(): TSettings | null {
 	} else {
 		data = data.allPrismicSettings.edges[0].node.dataRaw;
 	}
-
 	return {
 		email: RichText.asText(data.email),
 		head_title: RichText.asText(data.head_title),
@@ -117,6 +158,9 @@ export function getSettingData(): TSettings | null {
 			url: data.logo_image.url,
 		},
 		phone: RichText.asText(data.phone),
+		address: data.address,
+		blog_list_image: data.blog_list_image.url,
+		blog_list_title: RichText.asText(data.blog_list_title),
 	};
 }
 

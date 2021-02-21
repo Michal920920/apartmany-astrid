@@ -29,6 +29,32 @@
         "single": "paragraph",
         "label": "Email"
       }
+    },
+    "address": {
+      "type": "StructuredText",
+      "config": {
+        "multi": "paragraph, strong, em",
+        "label": "adresa",
+        "placeholder": "Řádek s adresou"
+      }
+    }
+  },
+  "Blog": {
+    "blog_list_title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading2",
+        "label": "Titulek",
+        "placeholder": "Titulek na výpisu příspěvků"
+      }
+    },
+    "blog_list_image": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Obrázek"
+      }
     }
   }
 }
