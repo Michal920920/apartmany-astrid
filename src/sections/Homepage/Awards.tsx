@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {Parallax} from 'react-parallax';
-import {Link} from "gatsby";
 import icon from './../../assets/img/icon/trophy.svg';
 
 export type TAwards = {

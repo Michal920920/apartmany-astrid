@@ -22,11 +22,6 @@ class Apartments extends React.Component<{ data: TApartments }> {
 						<span className="title-tag">{data.main_subtitle}</span>
 						<h2>{data.main_title}</h2>
 					</div>
-					<div className="text-center mb-20">
-						<Link to="/apartment-grid">View more
-							<i className="fal fa-arrow-right ml-2"/>
-						</Link>
-					</div>
 					<div className="row justify-content-center">
 						{data.apartments.map((item, i) => (
 							<div key={i} className="col-lg-3 col-md-6">

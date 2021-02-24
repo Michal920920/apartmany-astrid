@@ -77,7 +77,7 @@ class About extends React.Component<{ data: TAbout }> {
 								<p>
 									{data.text}
 								</p>
-								<Link to="#" className="main-btn btn-filled mt-40"> Book Now</Link>
+								{/*<a href="#footer" className="main-btn btn-filled mt-40"> Zavolejte</a>*/}
 							</div>
 						</div>
 					</div>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {graphql, Link} from "gatsby";
 import Layout from "../components/layout";
 import {getBlogListData, getSettingData} from "../models/dataManager/PrismicDataSource";
-import moment from 'moment';
+import * as moment from 'moment'
 
 const Blog = ({data}) => {
 	if (!data) {
@@ -17,8 +17,8 @@ const Blog = ({data}) => {
 					<div className="breadcrumb-text">
 						<h2 className="page-title">{settingData.blog_list_title}</h2>
 						<ul className="breadcrumb-nav">
-							<li><Link to="/">Home</Link></li>
-							<li className="active">Blog</li>
+							<li><Link to="/">Domů</Link></li>
+							<li className="active">Novinky</li>
 						</ul>
 					</div>
 				</div>

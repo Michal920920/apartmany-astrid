@@ -23,8 +23,7 @@ module.exports = {
 				repositoryName: 'apartmany-astrid',
 				accessToken: `${process.env.API_KEY}`,
 				linkResolver: ({ node, key, value }) => post => `/${post.uid}`,
-				//accessToken                : 'MC5ZQ0JKT2hJQUFDTUFOcVFl.JO-_vV0Xe--_vTMg77-9Ku-_vUjvv71D77-977-977-977-977-9JVHvv73vv71-b--_ve-_ve-_ve-_vQQsFw',
-				//releaseID                  : 'YB8FRxIAACAAMRN5',
+				releaseID                  : 'YDa2rRIAACYAO7IP',
 				schemas: {
 					homepage: require('./custom_types/homepage.json'),
 				},

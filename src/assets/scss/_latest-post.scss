@@ -47,10 +47,10 @@
 					a {
 						font-weight: 500;
 						color: $text-color;
-						i {
-							margin-right: 10px;
-						}
 					}
+                    i {
+                      margin-right: 10px;
+                    }
 					&:last-child {
 						margin-right: 0;
 					}

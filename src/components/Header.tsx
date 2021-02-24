@@ -108,7 +108,7 @@ export class Header extends React.Component<Props, State> {
 									<ul>
 										{navigationmenu.length > 0 ? navigationmenu.map((item, i) => (
 											<li key={i} className="menu-item">
-												<Link to={item.link}>{item.linkText}</Link>
+												<a href={item.link}>{item.linkText}</a>
 											</li>
 										)) : null}
 									</ul>
