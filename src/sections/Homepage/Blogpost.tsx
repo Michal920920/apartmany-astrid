@@ -32,6 +32,9 @@ class Blogpost extends React.Component<{ data: TBlogPostThumb[] }> {
 	}
 
 	render() {
+		if (!this.props.data) {
+			return null;
+		}
 		const data = this.props.data;
 
 		return (
