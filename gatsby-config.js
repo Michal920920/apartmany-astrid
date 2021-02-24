@@ -21,10 +21,10 @@ module.exports = {
 			resolve: 'gatsby-source-prismic',
 			options: {
 				repositoryName: 'apartmany-astrid',
-				accessToken: `${process.env.API_KEY}`,
-				linkResolver: ({ node, key, value }) => post => `/${post.uid}`,
-				releaseID                  : 'YDa2rRIAACYAO7IP',
-				schemas: {
+				accessToken   : 'MC5ZREFkSVJFQUFDUUFUZE02.77-977-9U0bvv71zczzvv71v77-9cO-_ve-_vRt4W--_vSjvv73vv71977-977-977-9Su-_ve-_vSxF77-9QA',
+				linkResolver  : ({node, key, value}) => post => `/${post.uid}`,
+				releaseID     : 'YDa2rRIAACYAO7IP',
+				schemas       : {
 					homepage: require('./custom_types/homepage.json'),
 				},
 			},
