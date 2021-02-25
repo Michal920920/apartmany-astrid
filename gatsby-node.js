@@ -15,7 +15,6 @@ exports.createPages = async function ({actions, graphql}) {
   `);
 	data.allPrismicBlog.edges.forEach(item => {
 		const slug = item.node.slugs[0];
-		console.log('item.node.slugs', slug[0]);
 
 		actions.createPage({
 			path     : `blog/${slug}`,

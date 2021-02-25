@@ -8,7 +8,9 @@ import Preloader from "./Preloader";
 
 export default function Layout({children}) {
 	const data: TSettings = getSettingData();
+	const isSSR = typeof window === "undefined"
 	return (
+		!isSSR &&
 		<Suspense fallback={<Preloader/>}>
 			<Helmet>
 				<meta charSet="utf-8"/>
@@ -23,6 +25,6 @@ export default function Layout({children}) {
 			{children}
 			<Footer data={data}/>
 		</Suspense>
-
 	)
+
 }

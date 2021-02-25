@@ -5,7 +5,7 @@ import {RichText} from "prismic-reactjs";
 import * as moment from "moment";
 
 const Post = (data) => {
-	if (!data) {
+	if (!data || !data.data) {
 		return null;
 	}
 	const values = data.data.allPrismicBlog.edges[0].node.data;

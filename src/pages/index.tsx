@@ -1,33 +1,31 @@
 import * as React from 'react';
-import {Suspense} from 'react';
 import {graphql} from "gatsby";
-// import * as serviceWorker from './serviceWorker';
 
 // Css
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../../node_modules/slick-carousel/slick/slick.css';
 import '../../node_modules/slick-carousel/slick/slick-theme.css';
 
-// import '../../node_modules/animate.css/animate.css';
-// import '../../node_modules/magnific-popup/dist/magnific-popup.css';
 import './../assets/css/font-awesome.min.css';
 import './../assets/css/flaticon.css';
 import './../assets/fonts/flaticon/flaticon-2.css';
 import './../assets/css/default.css';
 import './../assets/css/style.css';
-import ReactMapboxGl, {Layer, Feature} from 'react-mapbox-gl';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Layout from "../components/layout";
 import {getHomepageData} from "../models/dataManager/PrismicDataSource";
-// const Preloader = React.lazy(() => import("../components/Preloader"));
+
 const Index = ({data}) => {
 	if (!data) {
 		return null;
 	}
 	const Homepage = React.lazy(() => import("../sections/Homepage"));
 	const homeData = getHomepageData(data);
-	AOS.init();
+	setTimeout(() => {
+		AOS.init();
+	}, 1000)
+
 	return (
 		<Layout>
 			<Homepage data={homeData}/>
