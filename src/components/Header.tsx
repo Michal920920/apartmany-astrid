@@ -12,7 +12,7 @@ const navigationmenu = [
 	{
 		id: 2,
 		linkText: 'Apartmány',
-		link: '#apartments',
+		link: '/#apartments',
 	},
 	{
 		id: 3,
@@ -22,7 +22,7 @@ const navigationmenu = [
 	{
 		id: 4,
 		linkText: 'O nás',
-		link: '#about',
+		link: '/#about',
 	},
 ]
 type State = {
