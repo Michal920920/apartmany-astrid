@@ -21,9 +21,7 @@ class Features extends React.Component<{ data: TFeatures }> {
 											<i><img src={item.image_url}/></i>
 										</div>
 										<h3>{item.title}</h3>
-										<p>
-											{item.text}
-										</p>
+										<p>{item.text}</p>
 										<span className="count">0{index + 1}</span>
 									</div>
 								</div>
