@@ -127,16 +127,16 @@ export class Header extends React.Component<Props, State> {
 									<div className="item">
 										<i className="fal fa-phone"/>
 										<span>Telefon</span>
-										<Link to="tel:+90898787709">
+										<a href="callto:+90898787709">
 											<h5 className="title">{data.phone}</h5>
-										</Link>
+										</a>
 									</div>
 									<div className="item">
 										<i className="fal fa-envelope"/>
 										<span>Email</span>
-										<Link to="mailto:info@webmail.com">
+										<a href="mailto:info@webmail.com">
 											<h5 className="title">{data.email}</h5>
-										</Link>
+										</a>
 									</div>
 								</div>
 							</div>

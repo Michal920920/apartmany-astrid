@@ -219,5 +219,55 @@
         "placeholder": "Odkaz na booking"
       }
     }
+  },
+  "Vlastnosti": {
+    "features_main_subtitle": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading3",
+        "label": "Podnadpis"
+      }
+    },
+    "features_main_title": {
+      "type": "StructuredText",
+      "config": {
+        "single": "heading2",
+        "label": "Hlavní nadpis"
+      }
+    },
+    "features": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "feature_icon": {
+            "type": "Image",
+            "config": {
+              "constraint": {
+                "width": 70,
+                "height": 70
+              },
+              "thumbnails": [],
+              "label": "Ikona"
+            }
+          },
+          "feature_title": {
+            "type": "StructuredText",
+            "config": {
+              "single": "heading3",
+              "label": "Titulek"
+            }
+          },
+          "feature_text": {
+            "type": "StructuredText",
+            "config": {
+              "multi": "paragraph, strong, em",
+              "label": "Text",
+              "placeholder": "1-3 věty"
+            }
+          }
+        },
+        "label": "Vlastnosti"
+      }
+    }
   }
 }

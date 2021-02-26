@@ -44,14 +44,6 @@ export const query = graphql`
                         title {
                             text
                         }
-                        image_slider {
-                            image {
-                                alt
-                                copyright
-                                url
-                                thumbnails
-                            }
-                        }
                         ab_backgroud_image {
                             alt
                             url
@@ -118,10 +110,35 @@ export const query = graphql`
                         aw_background {
                             url
                         }
+                        image_slider {
+                            image {
+                                alt
+                                copyright
+                                url
+                                thumbnails
+                            }
+                        }
+                        features_main_title {
+                            text
+                        }
+                        features_main_subtitle {
+                            text
+                        }
+                        features {
+                            feature_icon {
+                                url
+                            }
+                            feature_text {
+                                text
+                            }
+                            feature_title {
+                                text
+                            }
+                        }
                     }
                 }
             }
-        },
+        }
         allPrismicBlog(limit: 3, sort: {fields: data___blog_date, order: DESC}) {
             nodes {
                 data {
@@ -136,7 +153,7 @@ export const query = graphql`
                     main_image {
                         url
                     }
-                },
+                }
                 slugs
             }
         }

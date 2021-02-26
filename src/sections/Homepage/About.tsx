@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Link} from "gatsby"
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 
 export type TAbout = {

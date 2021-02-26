@@ -1,96 +1,34 @@
 import * as React from 'react';
-import {Link} from "gatsby"
-import {Component} from "react";
+import {TFeatures} from "../../models/dataManager/PrismicDataSource";
 
-class Features extends Component {
+class Features extends React.Component<{ data: TFeatures }> {
 	render() {
+		const data = this.props.data;
 		return (
 			<section className="core-feature-section bg-white pt-115 pb-115">
 				<div className="container">
 					<div className="section-title text-center mb-50">
-						<span className="title-tag"> facilities </span>
-						<h2>Core Features</h2>
+						<span className="title-tag">{data.subtitle}</span>
+						<h2>{data.main_title}</h2>
 					</div>
 					{/* Featre Loop */}
 					<div className="row features-loop">
-						<div className="col-lg-4 col-sm-6 order-1">
-							<div className="feature-box wow fadeInLeft" data-wow-delay=".3s">
-								<div className="icon">
-									<i className="flaticon-rating"/>
+						{data.features.map((item, index) => {
+							return (
+								<div key={index} className="col-lg-4 col-sm-6 order-1">
+									<div className="feature-box wow fadeInLeft" data-wow-delay=".3s">
+										<div className="icon">
+											<i><img src={item.image_url}/></i>
+										</div>
+										<h3>{item.title}</h3>
+										<p>
+											{item.text}
+										</p>
+										<span className="count">0{index + 1}</span>
+									</div>
 								</div>
-								<h3><Link to="#">Have High Rating</Link></h3>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-									tempor incididunt ut labore et dolore magna..
-								</p>
-								<span className="count">01</span>
-							</div>
-						</div>
-						<div className="col-lg-4 col-sm-6 order-2">
-							<div className="feature-box wow fade-down" data-wow-delay=".4s">
-								<div className="icon">
-									<i className="flaticon-clock"/>
-								</div>
-								<h3><Link to="#">Quiet Hours</Link></h3>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-									tempor incididunt ut labore et dolore magna..
-								</p>
-								<span className="count">02</span>
-							</div>
-						</div>
-						<div className="col-lg-4 col-sm-6 order-3 order-sm-4 order-lg-3">
-							<div className="feature-box wow fadeInRight" data-wow-delay=".5s">
-								<div className="icon">
-									<i className="flaticon-location-pin"/>
-								</div>
-								<h3><Link to="#">Best Locations</Link></h3>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-									tempor incididunt ut labore et dolore magna..
-								</p>
-								<span className="count">03</span>
-							</div>
-						</div>
-						<div className="col-lg-4 col-sm-6 order-4 order-sm-3 order-lg-4">
-							<div className="feature-box wow fadeInLeft" data-wow-delay=".6s">
-								<div className="icon">
-									<i className="flaticon-clock-1"/>
-								</div>
-								<h3><Link to="#">Free Cancellation</Link></h3>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-									tempor incididunt ut labore et dolore magna..
-								</p>
-								<span className="count">04</span>
-							</div>
-						</div>
-						<div className="col-lg-4 col-sm-6 order-5">
-							<div className="feature-box wow fadeInUp" data-wow-delay=".7s">
-								<div className="icon">
-									<i className="flaticon-credit-card"/>
-								</div>
-								<h3><Link to="#">Payment Options</Link></h3>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-									tempor incididunt ut labore et dolore magna..
-								</p>
-								<span className="count">05</span>
-							</div>
-						</div>
-						<div className="col-lg-4 col-sm-6 order-6">
-							<div className="feature-box wow fadeInRight" data-wow-delay=".8s">
-								<div className="icon">
-									<i className="flaticon-discount"/>
-								</div>
-								<h3><Link to="#">Special Offers</Link></h3>
-								<p>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-									tempor incididunt ut labore et dolore magna..
-								</p>
-								<span className="count">06</span>
-							</div>
-						</div>
+							)
+						})}
 					</div>
 				</div>
 			</section>

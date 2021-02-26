@@ -5,12 +5,12 @@ import {RichText} from "prismic-reactjs";
 import * as moment from "moment";
 
 const Post = (data) => {
-	if (!data || !data.data) {
+	if (!data || !data.data.allPrismicBlog.nodes[0].data.body[0]) {
 		return null;
 	}
+
 	const textEditor = data.data.allPrismicBlog.nodes[0].data.body[0].primary.text_editor;
 	const values = data.data.allPrismicBlog.nodes[0].data;
-	console.log(textEditor);
 	return (
 		<Layout>
 			<section className="breadcrumb-area" style={{backgroundImage: "url(" + values.main_image.url + ")"}}>
@@ -35,9 +35,8 @@ const Post = (data) => {
 										<li><i className="fal fa-user"/>{values.blog_author}</li>
 										<li><i className="fal fa-calendar-alt"/>{moment(values.blog_date).format('d. M. YYYY')}</li>
 									</ul>
-									{textEditor.map((item, index) => {
-										return <RichText key={index} render={item}/>
-									})}
+									<p>{values.blog_anotation[0].text}</p>
+									<RichText render={textEditor}/>
 								</div>
 							</div>
 						</div>
@@ -60,6 +59,7 @@ export const pageQuery = graphql`
                     blog_author
                     blog_anotation {
                         text
+                        type
                     }
                     blog_title {
                         text

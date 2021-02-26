@@ -11,14 +11,14 @@ const Blogpost = React.lazy(() => import("./Blogpost"));
 
 export default class Homepage extends React.Component<{ data: THomepage }> {
 	render() {
-		const {about, main, apartments, awards, blogPostThumbs} = this.props.data;
+		const {about, main, apartments, awards, blogPostThumbs, features} = this.props.data;
 		return (
 			<>
 				<Banner data={main}/>
 				<About data={about}/>
 				<Facilities data={apartments}/>
 				<Awards data={awards}/>
-				<Features/>
+				<Features data={features}/>
 				<Blogpost data={blogPostThumbs}/>
 			</>
 		)

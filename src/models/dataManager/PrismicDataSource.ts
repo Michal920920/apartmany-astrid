@@ -12,11 +12,21 @@ var PrismicDOM = require('prismic-dom');
 export type THomepage = {
 	main: TMain,
 	about: TAbout,
-	apartments: TApartments
+	apartments: TApartments,
+	features: TFeatures,
 	awards: TAwards,
 	blogPostThumbs: TBlogPostThumb[]
 }
-
+export type TFeatures = {
+	main_title: string,
+	subtitle: string,
+	features: TFeaturesItems[],
+}
+export type TFeaturesItems = {
+	text: string,
+	title: string,
+	image_url: string,
+}
 export type TSettings = {
 	email: string,
 	head_title: string,
@@ -69,6 +79,17 @@ export function getHomepageData(data): THomepage {
 			image_url: hpData.aw_background.url,
 			link: hpData.aw_link.url,
 			title: hpData.aw_text.text,
+		},
+		features: {
+			main_title: hpData.features_main_title.text,
+			subtitle: hpData.features_main_subtitle.text,
+			features: hpData.features.map((item) => {
+				return {
+					text: item.feature_text.text,
+					title: item.feature_title.text,
+					image_url: item.feature_icon.url,
+				}
+			}),
 		},
 		blogPostThumbs: blogData.map((item) => {
 			return {
