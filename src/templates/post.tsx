@@ -3,16 +3,25 @@ import {graphql, Link} from "gatsby";
 import Layout from "../components/layout";
 import {RichText} from "prismic-reactjs";
 import * as moment from "moment";
+import {withPreview} from "gatsby-source-prismic";
 
-const Post = (data) => {
-	if (!data || !data.data.allPrismicBlog.nodes[0].data.body[0]) {
+const Post = ({data}) => {
+	if (!data || !data.allPrismicBlog.nodes[0].data.body[0]) {
 		return null;
 	}
 
-	const textEditor = data.data.allPrismicBlog.nodes[0].data.body[0].primary.text_editor;
-	const values = data.data.allPrismicBlog.nodes[0].data;
+	const textEditor = data.allPrismicBlog.nodes[0].data.body[0].primary.text_editor;
+	const values = data.allPrismicBlog.nodes[0].data;
+	const {lang, type, url} = data.prismicBlog || {}
+	const alternateLanguages = data.prismicBlog.alternate_languages
+	const activeDoc = {
+		lang,
+		type,
+		url,
+		alternateLanguages,
+	}
 	return (
-		<Layout>
+		<Layout activeDocMeta={activeDoc}>
 			<section className="breadcrumb-area" style={{backgroundImage: "url(" + values.main_image.url + ")"}}>
 				<div className="container">
 					<div className="breadcrumb-text">
@@ -46,9 +55,18 @@ const Post = (data) => {
 		</Layout>
 	)
 }
-export default Post
+
 export const pageQuery = graphql`
-    query PostBySlug($slug: String!) {
+    query PostBySlug($slug: String!,$lang: String) {
+        prismicBlog(lang: {eq: $lang}) {
+            lang
+            type
+            url
+            alternate_languages {
+                lang
+                type
+            }
+        },
         allPrismicBlog(filter: {slugs: {eq: $slug}}) {
             nodes {
                 data {
@@ -88,3 +106,4 @@ export const pageQuery = graphql`
         }
     }
 `
+export default withPreview(Post)

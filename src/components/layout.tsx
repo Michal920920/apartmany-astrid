@@ -6,7 +6,7 @@ import {Footer} from "./Footer";
 import {Header} from "./Header";
 import Preloader from "./Preloader";
 
-export default function Layout({children}) {
+export default function Layout({children, activeDocMeta}) {
 	const data: TSettings = getSettingData();
 	const isSSR = typeof window === "undefined"
 	return (
@@ -21,7 +21,7 @@ export default function Layout({children}) {
 				<meta name='author' content='Michal Buráň / michal.92@email.cz'/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			</Helmet>
-			<Header data={data}/>
+			<Header data={data} activeDocMeta={activeDocMeta}/>
 			{children}
 			<Footer data={data}/>
 		</Suspense>

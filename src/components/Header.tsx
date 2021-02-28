@@ -2,6 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames'
 import {Link} from "gatsby"
 import {TSettings} from "../models/dataManager/PrismicDataSource";
+import LangSwitcher from "./LangSwitcher";
 
 const navigationmenu = [
 	{
@@ -33,6 +34,7 @@ type State = {
 }
 type Props = {
 	data: TSettings
+	activeDocMeta: any
 };
 
 
@@ -123,6 +125,12 @@ export class Header extends React.Component<Props, State> {
 							{/* Header Info Pussed To Menu Wrap */}
 							<div className={`nav-push-item ${classNamess}`}>
 								{/* Header Info */}
+								{/*<ul className="lang-switcher">*/}
+								{/*	<li className="active">CZ</li>*/}
+								{/*	<li><Link to={linkResolver('de')}></Link>DE</li>*/}
+								{/*	<li>EN</li>*/}
+								{/*</ul>*/}
+								<LangSwitcher activeDocMeta={this.props.activeDocMeta}/>
 								<div className="header-info d-lg-flex align-items-center">
 									<div className="item">
 										<i className="fal fa-phone"/>

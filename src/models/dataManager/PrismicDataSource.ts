@@ -5,7 +5,6 @@ import {TMain} from "../../sections/Homepage/Banner";
 import {TApartments} from "../../sections/Homepage/Apartments";
 import {TBlogPostThumb} from "../../sections/Homepage/Blogpost";
 import {TAwards} from "../../sections/Homepage/Awards";
-import {ReactNode} from "react";
 
 var PrismicDOM = require('prismic-dom');
 
@@ -41,7 +40,7 @@ export type TSettings = {
 }
 
 export function getHomepageData(data): THomepage {
-	let hpData = data.allPrismicHomepage.edges[0].node.data
+	let hpData = data.allPrismicHomepage.edges[0].node.data;
 	let blogData = data.allPrismicBlog.nodes;
 	return {
 		main: {

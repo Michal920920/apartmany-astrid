@@ -9,3 +9,23 @@ body
 	main
 		margin-top: 140px
 		padding: 0 24px
+
+.lang-switcher
+	display: flex
+	justify-content: flex-end
+	align-items: center
+	position: relative
+	bottom: 10px
+
+	li
+		cursor: pointer
+		margin-right: 4px
+		font-size: 15px
+
+		&:not(:last-child):after
+			content: '|'
+			margin-left: 4px
+
+		&.active
+			font-weight: 600
+

@@ -3,15 +3,26 @@ import {graphql, Link} from "gatsby";
 import Layout from "../components/layout";
 import {getBlogListData, getSettingData} from "../models/dataManager/PrismicDataSource";
 import * as moment from 'moment'
+import {withPreview} from "gatsby-source-prismic";
 
 const Blog = ({data}) => {
 	if (!data) {
 		return null;
 	}
+
+	const {lang, type, url} = data.prismicBlog || {}
+	const alternateLanguages = data.prismicBlog.alternate_languages
+	const activeDoc = {
+		lang,
+		type,
+		url,
+		alternateLanguages,
+	}
+
 	const blogData = getBlogListData(data);
 	const settingData = getSettingData();
 	return (
-		<Layout>
+		<Layout activeDocMeta={activeDoc}>
 			<section className="breadcrumb-area" style={{backgroundImage: "url(" + settingData.blog_list_image + ")"}}>
 				<div className="container">
 					<div className="breadcrumb-text">
@@ -59,7 +70,16 @@ const Blog = ({data}) => {
 	)
 }
 export const query = graphql`
-    query BlogListQuery {
+    query BlogListQuery($lang: String) {
+        prismicBlog(lang: {eq: $lang}) {
+            lang
+            type
+            url
+            alternate_languages {
+                lang
+                type
+            }
+        }
         allPrismicBlog {
             edges {
                 node {
@@ -83,4 +103,4 @@ export const query = graphql`
     }
 
 `
-export default Blog;
+export default withPreview(Blog);

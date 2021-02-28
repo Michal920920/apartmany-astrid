@@ -15,6 +15,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Layout from "../components/layout";
 import {getHomepageData} from "../models/dataManager/PrismicDataSource";
+import {withPreview} from "gatsby-source-prismic";
 
 const Index = ({data}) => {
 	if (!data) {
@@ -22,21 +23,43 @@ const Index = ({data}) => {
 	}
 	const Homepage = React.lazy(() => import("../sections/Homepage"));
 	const homeData = getHomepageData(data);
+
+	const {lang, type, url} = data.prismicHomepage || {}
+	const alternateLanguages = data.prismicHomepage.alternate_languages
+	const activeDoc = {
+		lang,
+		type,
+		url,
+		alternateLanguages,
+	}
+
 	setTimeout(() => {
 		AOS.init();
 	}, 1000)
 
 	return (
-		<Layout>
+		<Layout activeDocMeta={activeDoc}>
 			<Homepage data={homeData}/>
 		</Layout>
 	)
 }
 export const query = graphql`
-    query MyQuery {
-        allPrismicHomepage {
+    query MyQuery($lang: String) {
+        prismicHomepage(lang: {eq: $lang}) {
+            alternate_languages {
+                uid
+                type
+                lang
+                url
+            }
+            lang
+            url
+            type
+        },
+        allPrismicHomepage{
             edges {
                 node {
+                    lang
                     data {
                         sub_title {
                             text
@@ -101,6 +124,12 @@ export const query = graphql`
                                 text
                             }
                         }
+                        features_main_subtitle {
+                            text
+                        }
+                        features_main_title {
+                            text
+                        }
                         aw_link {
                             url
                         }
@@ -109,20 +138,6 @@ export const query = graphql`
                         }
                         aw_background {
                             url
-                        }
-                        image_slider {
-                            image {
-                                alt
-                                copyright
-                                url
-                                thumbnails
-                            }
-                        }
-                        features_main_title {
-                            text
-                        }
-                        features_main_subtitle {
-                            text
                         }
                         features {
                             feature_icon {
@@ -135,11 +150,32 @@ export const query = graphql`
                                 text
                             }
                         }
+                        image_slider {
+                            image {
+                                alt
+                                copyright
+                                url
+                                thumbnails
+                            }
+                        }
+                    }
+                    alternate_languages {
+                        uid
+                        type
+                        lang
+                        url
                     }
                 }
             }
         }
         allPrismicBlog(limit: 3, sort: {fields: data___blog_date, order: DESC}) {
+            nodes {
+                lang
+                alternate_languages {
+                    type
+                    lang
+                }
+            }
             nodes {
                 data {
                     blog_date
@@ -155,8 +191,12 @@ export const query = graphql`
                     }
                 }
                 slugs
+                alternate_languages {
+                    type
+                    lang
+                }
             }
         }
     }
 `
-export default Index;
+export default withPreview(Index);
