@@ -56,5 +56,29 @@
         "label": "Obrázek"
       }
     }
+  },
+  "Menu": {
+    "main_menu": {
+      "type": "Group",
+      "config": {
+        "fields": {
+          "link_name": {
+            "type": "StructuredText",
+            "config": {
+              "single": "heading4",
+              "label": "Název"
+            }
+          },
+          "url": {
+            "type": "Link",
+            "config": {
+              "label": "url",
+              "placeholder": "Začíná '/'"
+            }
+          }
+        },
+        "label": "Menu"
+      }
+    }
   }
 }

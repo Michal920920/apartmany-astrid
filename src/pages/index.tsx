@@ -24,21 +24,13 @@ const Index = ({data}) => {
 	const Homepage = React.lazy(() => import("../sections/Homepage"));
 	const homeData = getHomepageData(data);
 
-	const {lang, type, url} = data.prismicHomepage || {}
-	const alternateLanguages = data.prismicHomepage.alternate_languages
-	const activeDoc = {
-		lang,
-		type,
-		url,
-		alternateLanguages,
-	}
 
 	setTimeout(() => {
 		AOS.init();
 	}, 1000)
 
 	return (
-		<Layout activeDocMeta={activeDoc}>
+		<Layout>
 			<Homepage data={homeData}/>
 		</Layout>
 	)
@@ -56,7 +48,7 @@ export const query = graphql`
             url
             type
         },
-        allPrismicHomepage{
+        allPrismicHomepage(filter: {lang: {eq: $lang}}){
             edges {
                 node {
                     lang

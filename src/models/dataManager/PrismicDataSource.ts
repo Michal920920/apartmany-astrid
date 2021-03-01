@@ -34,9 +34,11 @@ export type TSettings = {
 		url: string,
 	},
 	address: RichTextBlock[],
+	main_menu: any,
 	phone: string,
 	blog_list_image: string,
 	blog_list_title: string,
+	langs: any
 }
 
 export function getHomepageData(data): THomepage {
@@ -126,7 +128,17 @@ export function getBlogListData(data): TBlogList | null {
 
 export function getSettingData(): TSettings | null {
 	let data = useStaticQuery(graphql`
-        {
+        {prismicHomepage {
+            alternate_languages {
+                uid
+                type
+                lang
+                url
+            }
+            lang
+            url
+            type
+        },
             allPrismicSettings {
                 edges {
                     node {
@@ -158,6 +170,14 @@ export function getSettingData(): TSettings | null {
                                     end
                                     type
                                 }
+                            },
+                            main_menu {
+                                anchor {
+                                    text
+                                }
+                                link_name {
+                                    text
+                                }
                             }
                         }
                     }
@@ -165,22 +185,34 @@ export function getSettingData(): TSettings | null {
             }
         }
 	`);
+	let settings: TSettings;
 	if (!data) {
 		return null
 	} else {
-		data = data.allPrismicSettings.edges[0].node.dataRaw;
+		settings = data.allPrismicSettings.edges[0].node.dataRaw;
 	}
+	const {lang, type, url} = data.prismicHomepage || {}
+	const alternateLanguages = data.prismicHomepage.alternate_languages
+	const activeDoc = {
+		lang,
+		type,
+		url,
+		alternateLanguages,
+	}
+
 	return {
-		email: RichText.asText(data.email),
-		head_title: RichText.asText(data.head_title),
+		email: RichText.asText(settings.email),
+		head_title: RichText.asText(settings.head_title),
 		logo_image: {
-			alt: data.logo_image.alt,
-			url: data.logo_image.url,
+			alt: settings.logo_image.alt,
+			url: settings.logo_image.url,
 		},
-		phone: RichText.asText(data.phone),
-		address: data.address,
-		blog_list_image: data.blog_list_image.url,
-		blog_list_title: RichText.asText(data.blog_list_title),
+		phone: RichText.asText(settings.phone),
+		address: settings.address,
+		main_menu: settings.main_menu,
+		blog_list_image: settings.blog_list_image.url,
+		blog_list_title: RichText.asText(settings.blog_list_title),
+		langs: activeDoc
 	};
 }
 

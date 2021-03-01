@@ -4,28 +4,6 @@ import {Link} from "gatsby"
 import {TSettings} from "../models/dataManager/PrismicDataSource";
 import LangSwitcher from "./LangSwitcher";
 
-const navigationmenu = [
-	{
-		id: 1,
-		linkText: 'Domů',
-		link: '/',
-	},
-	{
-		id: 2,
-		linkText: 'Apartmány',
-		link: '/#apartments',
-	},
-	{
-		id: 3,
-		linkText: 'Novinky',
-		link: '/blog',
-	},
-	{
-		id: 4,
-		linkText: 'O nás',
-		link: '/#about',
-	},
-]
 type State = {
 	classMethod: boolean,
 	toggleMethod: boolean,
@@ -94,6 +72,7 @@ export class Header extends React.Component<Props, State> {
 		const classNamess: string = this.state.isMobile ? 'd-none' : '';
 		const stickyheader: string = this.state.isTop ? 'sticky-active' : '';
 		const data = this.props.data;
+		console.log('data', data)
 		return (
 			<>
 				<header className={`header-absolute sticky-header ${stickyheader}`} id="header">
@@ -108,28 +87,20 @@ export class Header extends React.Component<Props, State> {
 								{/* Mneu Items */}
 								<div className="menu-items">
 									<ul>
-										{navigationmenu.length > 0 ? navigationmenu.map((item, i) => (
+										{data.main_menu.length > 0 ? data.main_menu.map((item, i) => (
+
 											<li key={i} className="menu-item">
-												<a href={item.link}>{item.linkText}</a>
+												<a href={item.anchor[0].text}>{item.anchor[0].text} {item.link_name[0].text}</a>
 											</li>
 										)) : null}
 									</ul>
 								</div>
-								{/* from pushed-item */}
 								<div className="nav-pushed-item"/>
 							</div>
-							{/* Site Logo */}
 							<div className="site-logo">
-								<Link to="/"><img src={data.logo_image.url} alt={data.logo_image.alt}/></Link>
+								<Link to={'/'}><img src={data.logo_image.url} alt={data.logo_image.alt}/></Link>
 							</div>
-							{/* Header Info Pussed To Menu Wrap */}
 							<div className={`nav-push-item ${classNamess}`}>
-								{/* Header Info */}
-								{/*<ul className="lang-switcher">*/}
-								{/*	<li className="active">CZ</li>*/}
-								{/*	<li><Link to={linkResolver('de')}></Link>DE</li>*/}
-								{/*	<li>EN</li>*/}
-								{/*</ul>*/}
 								<LangSwitcher activeDocMeta={this.props.activeDocMeta}/>
 								<div className="header-info d-lg-flex align-items-center">
 									<div className="item">

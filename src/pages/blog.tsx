@@ -9,20 +9,10 @@ const Blog = ({data}) => {
 	if (!data) {
 		return null;
 	}
-
-	const {lang, type, url} = data.prismicBlog || {}
-	const alternateLanguages = data.prismicBlog.alternate_languages
-	const activeDoc = {
-		lang,
-		type,
-		url,
-		alternateLanguages,
-	}
-
 	const blogData = getBlogListData(data);
 	const settingData = getSettingData();
 	return (
-		<Layout activeDocMeta={activeDoc}>
+		<Layout>
 			<section className="breadcrumb-area" style={{backgroundImage: "url(" + settingData.blog_list_image + ")"}}>
 				<div className="container">
 					<div className="breadcrumb-text">
@@ -71,16 +61,18 @@ const Blog = ({data}) => {
 }
 export const query = graphql`
     query BlogListQuery($lang: String) {
-        prismicBlog(lang: {eq: $lang}) {
-            lang
-            type
-            url
+        prismicHomepage(lang: {eq: $lang}) {
             alternate_languages {
-                lang
+                uid
                 type
+                lang
+                url
             }
-        }
-        allPrismicBlog {
+            lang
+            url
+            type
+        },
+        allPrismicBlog(filter: {lang: {eq: $lang}}) {
             edges {
                 node {
                     data {
