@@ -12,23 +12,16 @@ const Post = ({data}) => {
 
 	const textEditor = data.allPrismicBlog.nodes[0].data.body[0].primary.text_editor;
 	const values = data.allPrismicBlog.nodes[0].data;
-	const {lang, type, url} = data.prismicBlog || {}
-	const alternateLanguages = data.prismicBlog.alternate_languages
-	const activeDoc = {
-		lang,
-		type,
-		url,
-		alternateLanguages,
-	}
+	const settingValues = data.allPrismicSettings.edges[0].node.data;
 	return (
-		<Layout activeDocMeta={activeDoc}>
-			<section className="breadcrumb-area" style={{backgroundImage: "url(" + values.main_image.url + ")"}}>
+		<Layout>
+			<section className="breadcrumb-area" style={{backgroundImage: "url(" + settingValues.blog_list_image.url + ")"}}>
 				<div className="container">
 					<div className="breadcrumb-text">
-						<h2 className="page-title">{values.blog_list_title}</h2>
+						<h2 className="page-title">{settingValues.blog_list_title[0].text}</h2>
 						<ul className="breadcrumb-nav">
 							<li><Link to="/">Domů</Link></li>
-							<li className="active">Novinky</li>
+							<li className="active">{settingValues.blog_list_title[0].text}</li>
 						</ul>
 					</div>
 				</div>
@@ -65,6 +58,20 @@ export const pageQuery = graphql`
             alternate_languages {
                 lang
                 type
+            }
+        },
+        allPrismicSettings(filter: {lang: {eq: $lang}}) {
+            edges {
+                node {
+                    data {
+                        blog_list_image {
+                            url
+                        }
+                        blog_list_title {
+                            text
+                        }
+                    }
+                }
             }
         },
         allPrismicBlog(filter: {slugs: {eq: $slug}}) {

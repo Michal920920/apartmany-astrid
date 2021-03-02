@@ -9,7 +9,11 @@ const linkResolver = (doc) => {
 			? `/blog/${properties.slugs[0]}`
 			: `/blog/${properties.lang}/${properties.slugs[0]}`
 	}
-
+	if (properties === '/blog') {
+		return doc.lang === defaultLanguage
+			? `/blog`
+			: `/blog/${properties.lang}`
+	}
 	return '/'
 }
 

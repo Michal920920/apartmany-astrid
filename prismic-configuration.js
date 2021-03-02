@@ -20,8 +20,12 @@ module.exports = {
 		},
 		{
 			type     : "Blog",
-			match    : "/blog/:uid",
+			match    : "/blog/:lang?/:uid",
 			component: require.resolve("./src/templates/post.tsx"),
+		},{
+			type     : "Blog",
+			match    : "/blog/:lang?",
+			component: require.resolve("./src/templates/blog.tsx"),
 		},
 	],
 }

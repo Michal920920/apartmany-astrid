@@ -22,7 +22,6 @@ module.exports = {
 			options: {
 				repositoryName: 'apartmany-astrid',
 				accessToken   : 'MC5ZREFkSVJFQUFDUUFUZE02.77-977-9U0bvv71zczzvv71v77-9cO-_ve-_vRt4W--_vSjvv73vv71977-977-977-9Su-_ve-_vSxF77-9QA',
-				//linkResolver  : ({node, key, value}) => post => `/${post.uid}`,
 				linkResolver: () => (doc) => linkResolver(doc),
 				releaseID   : 'YDa2rRIAACYAO7IP',
 				schemas     : {

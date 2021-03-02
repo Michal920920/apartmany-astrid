@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {navigate} from 'gatsby'
-import linkResolver from './../utils/linkResolver.js'
+const linkResolver = require('./../utils/linkResolver.js')
 
 const LangSwitcher = ({activeDocMeta}) => {
 	const currentLang = activeDocMeta.lang
@@ -25,7 +25,7 @@ const LangSwitcher = ({activeDocMeta}) => {
 	}
 
 	return (
-		<li className="language-switcher">
+		<div className="language-switcher">
 			<select
 				value={currentLang}
 				onChange={handleLangChange}
@@ -33,7 +33,7 @@ const LangSwitcher = ({activeDocMeta}) => {
 				{currentLangOption}
 				{alternateLangOptions}
 			</select>
-		</li>
+		</div>
 	)
 }
 

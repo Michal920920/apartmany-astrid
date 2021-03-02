@@ -72,7 +72,6 @@ export class Header extends React.Component<Props, State> {
 		const classNamess: string = this.state.isMobile ? 'd-none' : '';
 		const stickyheader: string = this.state.isTop ? 'sticky-active' : '';
 		const data = this.props.data;
-		console.log('data', data)
 		return (
 			<>
 				<header className={`header-absolute sticky-header ${stickyheader}`} id="header">
@@ -88,9 +87,8 @@ export class Header extends React.Component<Props, State> {
 								<div className="menu-items">
 									<ul>
 										{data.main_menu.length > 0 ? data.main_menu.map((item, i) => (
-
 											<li key={i} className="menu-item">
-												<a href={item.anchor[0].text}>{item.anchor[0].text} {item.link_name[0].text}</a>
+												<Link to={item.link.url ?? item.link.slug}>{item.link_name[0].text}</Link>
 											</li>
 										)) : null}
 									</ul>

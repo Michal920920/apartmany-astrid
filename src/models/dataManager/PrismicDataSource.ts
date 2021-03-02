@@ -36,8 +36,6 @@ export type TSettings = {
 	address: RichTextBlock[],
 	main_menu: any,
 	phone: string,
-	blog_list_image: string,
-	blog_list_title: string,
 	langs: any
 }
 
@@ -126,71 +124,10 @@ export function getBlogListData(data): TBlogList | null {
 	};
 }
 
-export function getSettingData(): TSettings | null {
-	let data = useStaticQuery(graphql`
-        {prismicHomepage {
-            alternate_languages {
-                uid
-                type
-                lang
-                url
-            }
-            lang
-            url
-            type
-        },
-            allPrismicSettings {
-                edges {
-                    node {
-                        dataRaw {
-                            email {
-                                text
-                            }
-                            head_title {
-                                text
-                            }
-                            logo_image {
-                                alt
-                                url
-                            }
-                            phone {
-                                text
-                            }
-                            blog_list_image {
-                                url
-                            }
-                            blog_list_title {
-                                text
-                            }
-                            address {
-                                type
-                                text
-                                spans {
-                                    start
-                                    end
-                                    type
-                                }
-                            },
-                            main_menu {
-                                anchor {
-                                    text
-                                }
-                                link_name {
-                                    text
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-	`);
+export function transformSettingData(data): TSettings {
+
 	let settings: TSettings;
-	if (!data) {
-		return null
-	} else {
-		settings = data.allPrismicSettings.edges[0].node.dataRaw;
-	}
+	settings = data.allPrismicSettings.edges[0].node.dataRaw;
 	const {lang, type, url} = data.prismicHomepage || {}
 	const alternateLanguages = data.prismicHomepage.alternate_languages
 	const activeDoc = {
@@ -210,8 +147,6 @@ export function getSettingData(): TSettings | null {
 		phone: RichText.asText(settings.phone),
 		address: settings.address,
 		main_menu: settings.main_menu,
-		blog_list_image: settings.blog_list_image.url,
-		blog_list_title: RichText.asText(settings.blog_list_title),
 		langs: activeDoc
 	};
 }
