@@ -25,9 +25,10 @@ const imagesLoadedOptions = {
 
 class About extends React.Component<{ data: TAbout }> {
 	render() {
+
 		const data = this.props.data;
 		return (
-			<section className="about-section pt-115 pb-115 mt-100" id="about">
+			<section className={`about-section ${window.innerWidth > 991 ? 'pt-115 pb-115 mt-100' : 'pt-60 pb-60 mt-30'}`} id="about">
 				<div className="container">
 					<div className="row align-items-center justify-content-center">
 						<div className="col-lg-6 col-md-10" data-aos="fade-right" data-aos-offset="80">

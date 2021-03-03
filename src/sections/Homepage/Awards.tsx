@@ -20,7 +20,7 @@ class Awards extends React.Component<{ data: TAwards }> {
 					style={{zIndex: 5}}
 					strength={100}
 				>
-					<div className='parallax_image' style={{height: '700px'}}>
+					<div className='parallax_image' style={window.innerWidth > 991 ? {height: '700px'} : {height: 'auto'}}>
 						<div className='parallax_text'>
 							<img alt='trophy_icon' src={icon}/>
 							<h3>{data.title}</h3>

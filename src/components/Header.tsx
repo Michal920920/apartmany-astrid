@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import {Link} from "gatsby"
 import {TSettings} from "../models/dataManager/PrismicDataSource";
 import LangSwitcher from "./LangSwitcher";
+import AnchorLink from 'react-anchor-link-smooth-scroll'
 
 type State = {
 	classMethod: boolean,
@@ -22,12 +23,13 @@ export class Header extends React.Component<Props, State> {
 		this.state = {
 			classMethod: false,
 			toggleMethod: false,
-			isMobile: false,
-			isTop: false,
+			isMobile: window.innerWidth < 991,
+			isTop: window.scrollY > 110,
 		};
 		this.addClass = this.addClass.bind(this);
 		this.removeClass = this.removeClass.bind(this);
 		this.toggleClass = this.toggleClass.bind(this);
+
 	}
 
 	addClass() {
@@ -54,19 +56,12 @@ export class Header extends React.Component<Props, State> {
 				isMobile: window.innerWidth < 991
 			});
 		}, false);
-		window.addEventListener('load', () => {
-			this.setState({
-				isMobile: window.innerWidth < 991
-			});
-		}, false);
-
 		window.addEventListener('scroll', () => {
 			this.setState({
 				isTop: window.scrollY > 110
 			});
 		}, false);
 	}
-
 
 	render() {
 		const className: string = this.state.isMobile ? 'breakpoint-on' : '';
@@ -89,12 +84,36 @@ export class Header extends React.Component<Props, State> {
 									<ul>
 										{data.main_menu.length > 0 ? data.main_menu.map((item, i) => (
 											<li key={i} className="menu-item">
-												<Link to={item.link.url}>{item.link_name[0].text}</Link>
+												{item.link.url.includes('#') ?
+													<AnchorLink href='#apartments'>{item.link_name[0].text}</AnchorLink>
+													:
+													<a href={item.link.url}>{item.link_name[0].text}</a>
+												}
 											</li>
 										)) : null}
 									</ul>
 								</div>
-								<div className="nav-pushed-item"/>
+								{this.state.isMobile &&
+								<div className={`nav-push-item`}>
+									{/* Header Info */}
+									<div className="header-info d-lg-flex align-items-center">
+										<div className="item">
+											<i className="fal fa-phone"/>
+											<span>Telefon</span>
+											<a href="callto:+90898787709">
+												<h5 className="title">{data.phone}</h5>
+											</a>
+										</div>
+										<div className="item">
+											<i className="fal fa-envelope"/>
+											<span>Email</span>
+											<a href="mailto:info@webmail.com">
+												<h5 className="title">{data.email}</h5>
+											</a>
+										</div>
+									</div>
+								</div>
+								}
 							</div>
 							<div className="site-logo">
 								<Link to={'/'}><img src={data.logo_image.url} alt={data.logo_image.alt}/></Link>

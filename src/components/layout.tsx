@@ -7,7 +7,6 @@ import {Header} from "./Header";
 import Preloader from "./Preloader";
 import {graphql, useStaticQuery} from "gatsby";
 
-
 const Layout = ({children}) => {
 	let data = useStaticQuery(graphql`
         query MyQuerya($lang: String) {
