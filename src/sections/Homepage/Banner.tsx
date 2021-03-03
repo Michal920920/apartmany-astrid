@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Link} from "gatsby"
 import Slider from 'react-slick';
+import AnchorLink from 'react-anchor-link-smooth-scroll'
 
 export type TMain = {
 	title: string,
@@ -10,6 +10,10 @@ export type TMain = {
 			url: string,
 			alt: string
 		}
+	}[]
+	buttons: {
+		url: string,
+		text: string
 	}[]
 }
 
@@ -36,12 +40,11 @@ class Banner extends React.Component<{ data: TMain }> {
 								<h1 className="title fade-left"> {data.title}
 								</h1>
 								<ul>
-									<li>
-										<Link className="main-btn btn-filled fade-up" to="/contact">{data.sub_title}</Link>
-									</li>
-									<li>
-										<Link className="main-btn btn-border fade-up" to="/about">{data.sub_title}</Link>
-									</li>
+									{data.buttons.map((item, index) => (
+										<li key={index}>
+											<AnchorLink className={`main-btn ${index % 2 ? 'btn-border ' : 'btn-filled'} fade-up`} href={item.url}>{item.text}</AnchorLink>
+										</li>
+									))}
 								</ul>
 							</div>
 						</div>

@@ -67,6 +67,7 @@ export class Header extends React.Component<Props, State> {
 		}, false);
 	}
 
+
 	render() {
 		const className: string = this.state.isMobile ? 'breakpoint-on' : '';
 		const classNamess: string = this.state.isMobile ? 'd-none' : '';
@@ -88,7 +89,7 @@ export class Header extends React.Component<Props, State> {
 									<ul>
 										{data.main_menu.length > 0 ? data.main_menu.map((item, i) => (
 											<li key={i} className="menu-item">
-												<a href={item.link.url ?? item.link.slug}>{item.link_name[0].text}</a>
+												<Link to={item.link.url}>{item.link_name[0].text}</Link>
 											</li>
 										)) : null}
 									</ul>

@@ -29,10 +29,10 @@
             }
           },
           "button_1_link": {
-            "type": "Link",
+            "type": "StructuredText",
             "config": {
-              "label": "Odkaz",
-              "placeholder": "Odkaz"
+              "single": "heading4",
+              "label": "Kotva"
             }
           }
         },

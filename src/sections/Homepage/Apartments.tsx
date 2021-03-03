@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Link} from "gatsby"
 
 export type TApartments = {
 	main_subtitle: string

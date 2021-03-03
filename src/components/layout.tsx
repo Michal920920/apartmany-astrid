@@ -6,7 +6,7 @@ import {Footer} from "./Footer";
 import {Header} from "./Header";
 import Preloader from "./Preloader";
 import {graphql, useStaticQuery} from "gatsby";
-import {withPreview} from "gatsby-source-prismic";
+
 
 const Layout = ({children}) => {
 	let data = useStaticQuery(graphql`

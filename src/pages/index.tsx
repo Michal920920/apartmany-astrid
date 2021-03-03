@@ -24,7 +24,6 @@ const Index = ({data}) => {
 	const Homepage = React.lazy(() => import("../sections/Homepage"));
 	const homeData = getHomepageData(data);
 
-
 	setTimeout(() => {
 		AOS.init();
 	}, 1000)
@@ -90,7 +89,7 @@ export const query = graphql`
                         }
                         buttons {
                             button_1_link {
-                                url
+                                text
                             }
                             button_1_text {
                                 text

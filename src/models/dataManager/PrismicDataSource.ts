@@ -47,6 +47,12 @@ export function getHomepageData(data): THomepage {
 			title: hpData.title.text,
 			sub_title: hpData.sub_title.text,
 			image_slider: hpData.image_slider,
+			buttons: hpData.buttons.map((item) => {
+				return {
+					url: item.button_1_link.text,
+					text: item.button_1_text.text,
+				}
+			})
 		},
 		about: {
 			title: hpData.ab_title.text,
