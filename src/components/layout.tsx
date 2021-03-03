@@ -79,6 +79,8 @@ const Layout = ({children}) => {
 				<meta name='robots' content='index,follow'/>
 				<meta name='author' content='Michal Buráň / michal.92@email.cz'/>
 				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+				<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+				<link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet'/>
 			</Helmet>
 			<Header data={settingsData} activeDocMeta={settingsData.langs}/>
 			{children}

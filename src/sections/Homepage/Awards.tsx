@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Parallax} from 'react-parallax';
 import icon from './../../assets/img/icon/trophy.svg';
+import {Link} from "gatsby";
 
 export type TAwards = {
 	title: string,
@@ -23,7 +24,7 @@ class Awards extends React.Component<{ data: TAwards }> {
 						<div className='parallax_text'>
 							<img alt='trophy_icon' src={icon}/>
 							<h3>{data.title}</h3>
-							<a href={data.link}>booking.com</a>
+							<Link to={data.link}>booking.com</Link>
 						</div>
 					</div>
 				</Parallax>

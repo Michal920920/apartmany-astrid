@@ -88,7 +88,7 @@ export class Header extends React.Component<Props, State> {
 									<ul>
 										{data.main_menu.length > 0 ? data.main_menu.map((item, i) => (
 											<li key={i} className="menu-item">
-												<Link to={item.link.url ?? item.link.slug}>{item.link_name[0].text}</Link>
+												<a href={item.link.url ?? item.link.slug}>{item.link_name[0].text}</a>
 											</li>
 										)) : null}
 									</ul>

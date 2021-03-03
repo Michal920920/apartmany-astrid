@@ -28,12 +28,6 @@ export class Footer extends React.Component<Props, any> {
 		});
 		return (
 			<>
-				<Helmet>
-					<link
-						href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css"
-						rel="stylesheet"
-					/>
-				</Helmet>
 				<Backtotop/>
 				<footer className="footer-two" id="footer">
 					<div className="footer-subscibe-area style-2 pt-50 pb-50">
@@ -82,8 +76,6 @@ export class Footer extends React.Component<Props, any> {
 						<Marker coordinates={[16.63145, 48.802]}>
 							<img src={pointer}/>
 						</Marker>
-						{/*<Layer type="symbol" id="marker" layout={{'icon-image': 'marker-15'}}>*/}
-						{/*</Layer>*/}
 					</Map>
 					<div className="copyright-area pt-30 pb-30">
 						<div className="container">

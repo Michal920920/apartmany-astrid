@@ -27,13 +27,13 @@ class Apartments extends React.Component<{ data: TApartments }> {
 							<div key={i} className="col-lg-3 col-md-6">
 								<div className="apartment-box">
 									<div className="image-box">
-										<Link to="/apartment-details" className="d-block">
+										<div className="d-block">
 											<img src={item.image} alt="img"/>
-										</Link>
+										</div>
 									</div>
 									<div className="content-box-2">
 										<h3 className="title">
-											<Link to="/apartment-details">{item.title}</Link>
+											{item.title}
 										</h3>
 										<p>{item.sub_title}</p>
 										<span className="price">{item.price}</span>
