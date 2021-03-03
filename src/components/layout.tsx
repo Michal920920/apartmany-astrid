@@ -55,7 +55,6 @@ const Layout = ({children}) => {
                                 }
                                 link {
                                     url
-                                    slug
                                 }
                             }
                         }
