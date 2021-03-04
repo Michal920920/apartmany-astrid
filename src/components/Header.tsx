@@ -99,14 +99,14 @@ export class Header extends React.Component<Props, State> {
 									<div className="header-info d-lg-flex align-items-center">
 										<div className="item">
 											<i className="fal fa-phone"/>
-											<span>Telefon</span>
+											<span>{data.translate_phone}</span>
 											<a href="callto:+90898787709">
 												<h5 className="title">{data.phone}</h5>
 											</a>
 										</div>
 										<div className="item">
 											<i className="fal fa-envelope"/>
-											<span>Email</span>
+											<span>{data.translate_email}</span>
 											<a href="mailto:info@webmail.com">
 												<h5 className="title">{data.email}</h5>
 											</a>

@@ -35,7 +35,7 @@ export class Footer extends React.Component<Props, any> {
 							<div className="row justify-content-center align-items-center">
 								<div className="col-lg-3">
 									<div className="subscribe">
-										<h3 className="mb-0 text-white">Těšíme se na Vás</h3>
+										<h3 className="mb-0 text-white">{data.translate_text}</h3>
 									</div>
 								</div>
 								<div className="col-lg-12 contact_us">
@@ -43,21 +43,21 @@ export class Footer extends React.Component<Props, any> {
 										<div className="block">
 											<img className="image" alt='home_ico' src={home_ico}/>
 											<div>
-												<h3>Adresa</h3>
+												<h3>{data.translate_address}</h3>
 												<RichText render={data.address}/>
 											</div>
 										</div>
 										<div className="block">
 											<img className="image" alt='home_ico' src={call_ico}/>
 											<div>
-												<h3>Telefon</h3>
+												<h3>{data.translate_phone}</h3>
 												<p>{data.phone}</p>
 											</div>
 										</div>
 										<div className="block">
 											<img className="image" alt='home_ico' src={email_ico}/>
 											<div>
-												<h3>Emailová adresa</h3>
+												<h3>{data.translate_email}</h3>
 												<p>{data.email}</p>
 											</div>
 										</div>

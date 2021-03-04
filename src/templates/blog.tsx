@@ -12,7 +12,7 @@ const Blog = ({data}) => {
 	const blogData = getBlogListData(data);
 	const settingValues = data.allPrismicSettings.edges[0].node.data;
 	return (
-		<Layout>
+		<Layout data={blogData.settings}>
 			<section className="breadcrumb-area" style={{backgroundImage: "url(" + settingValues.blog_list_image.url + ")"}}>
 				<div className="container">
 					<div className="breadcrumb-text">
@@ -83,6 +83,56 @@ export const query = graphql`
                             text
                         }
                     }
+                }
+            },
+            nodes {
+                data {
+                    email {
+                        text
+                    }
+                    head_title {
+                        text
+                    }
+                    logo_image {
+                        alt
+                        url
+                    }
+                    phone {
+                        text
+                    }
+                    address {
+                        type
+                        text
+                        spans {
+                            start
+                            end
+                            type
+                        }
+                    }
+                    main_menu {
+                        link_name {
+                            type
+                            text
+                        }
+                        link {
+                            url
+                        }
+                    }
+                    translate_address {
+                        text
+                    }
+                    translate_email {
+                        text
+                    }
+                    translate_footer_text1 {
+                        text
+                    }
+                    translate_phone {
+                        text
+                    }
+                }
+                alternate_languages {
+                    lang
                 }
             }
         },

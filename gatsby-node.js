@@ -11,18 +11,14 @@ exports.createPages = async function ({actions, graphql}) {
       url
       lang
       slugs
-       alternate_languages {
-        lang
-      }
     }
   }
   allPrismicHomepage {
-    totalCount
     nodes {
-      type
-      url
-      lang
-    }
+        url
+        type
+        lang
+      }
   }
   allPrismicSettings {
     nodes {

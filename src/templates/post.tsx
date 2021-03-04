@@ -4,17 +4,18 @@ import Layout from "../components/layout";
 import {RichText} from "prismic-reactjs";
 import * as moment from "moment";
 import {withPreview} from "gatsby-source-prismic";
+import {transformSettingData, TSettings} from "../models/dataManager/PrismicDataSource";
 
 const Post = ({data}) => {
 	if (!data || !data.allPrismicBlog.nodes[0].data.body[0]) {
 		return null;
 	}
-
+	const settingsData: TSettings = transformSettingData(data);
 	const textEditor = data.allPrismicBlog.nodes[0].data.body[0].primary.text_editor;
 	const values = data.allPrismicBlog.nodes[0].data;
 	const settingValues = data.allPrismicSettings.edges[0].node.data;
 	return (
-		<Layout>
+		<Layout data={settingsData}>
 			<section className="breadcrumb-area" style={{backgroundImage: "url(" + settingValues.blog_list_image.url + ")"}}>
 				<div className="container">
 					<div className="breadcrumb-text">
@@ -51,13 +52,13 @@ const Post = ({data}) => {
 
 export const pageQuery = graphql`
     query PostBySlug($slug: String!,$lang: String) {
-        prismicBlog(lang: {eq: $lang}) {
+        prismicBlog {
             lang
             type
-            url
+            url,
             alternate_languages {
-                lang
                 type
+                lang
             }
         },
         allPrismicSettings(filter: {lang: {eq: $lang}}) {
@@ -70,6 +71,53 @@ export const pageQuery = graphql`
                         blog_list_title {
                             text
                         }
+                    }
+                }
+            },
+            nodes {
+                data {
+                    email {
+                        text
+                    }
+                    head_title {
+                        text
+                    }
+                    logo_image {
+                        alt
+                        url
+                    }
+                    phone {
+                        text
+                    }
+                    address {
+                        type
+                        text
+                        spans {
+                            start
+                            end
+                            type
+                        }
+                    }
+                    main_menu {
+                        link_name {
+                            type
+                            text
+                        }
+                        link {
+                            url
+                        }
+                    }
+                    translate_address {
+                        text
+                    }
+                    translate_email {
+                        text
+                    }
+                    translate_footer_text1 {
+                        text
+                    }
+                    translate_phone {
+                        text
                     }
                 }
             }
@@ -92,18 +140,9 @@ export const pageQuery = graphql`
                     body {
                         primary {
                             text_editor {
-                                spans {
-                                    end
-                                    start
-                                    type
-                                }
                                 text
                                 type
                                 url
-                                dimensions {
-                                    height
-                                    width
-                                }
                             }
                         }
                         slice_type

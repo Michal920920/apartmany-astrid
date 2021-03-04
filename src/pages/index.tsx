@@ -29,7 +29,7 @@ const Index = ({data}) => {
 	}, 1000)
 
 	return (
-		<Layout>
+		<Layout data={homeData.settings}>
 			<Homepage data={homeData}/>
 		</Layout>
 	)
@@ -158,15 +158,63 @@ export const query = graphql`
                     }
                 }
             }
-        }
-        allPrismicBlog(limit: 3, sort: {fields: data___blog_date, order: DESC}) {
+        },
+        allPrismicSettings(filter: {lang: {eq: $lang}}) {
             nodes {
-                lang
+                data {
+                    email {
+                        text
+                    }
+                    head_title {
+                        text
+                    }
+                    logo_image {
+                        alt
+                        url
+                    }
+                    phone {
+                        text
+                    }
+                    address {
+                        type
+                        text
+                        spans {
+                            start
+                            end
+                            type
+                        }
+                    }
+                    main_menu {
+                        link_name {
+                            type
+                            text
+                        }
+                        link {
+                            url
+                        }
+                    }
+                    translate_address {
+                        text
+                    }
+                    translate_email {
+                        text
+                    }
+                    translate_footer_text1 {
+                        text
+                    }
+                    translate_phone {
+                        text
+                    }
+                }
                 alternate_languages {
-                    type
                     lang
                 }
             }
+        },
+        allPrismicBlog(
+            limit: 3,
+            sort: {fields: data___blog_date, order: DESC},
+            filter: {lang: {eq: $lang}}) {
             nodes {
                 data {
                     blog_date
@@ -182,10 +230,7 @@ export const query = graphql`
                     }
                 }
                 slugs
-                alternate_languages {
-                    type
-                    lang
-                }
+                lang
             }
         }
     }

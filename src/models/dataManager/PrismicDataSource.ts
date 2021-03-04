@@ -9,6 +9,7 @@ import {TAwards} from "../../sections/Homepage/Awards";
 var PrismicDOM = require('prismic-dom');
 
 export type THomepage = {
+	settings: TSettings,
 	main: TMain,
 	about: TAbout,
 	apartments: TApartments,
@@ -29,6 +30,10 @@ export type TFeaturesItems = {
 export type TSettings = {
 	email: string,
 	head_title: string,
+	translate_address: string,
+	translate_email: string,
+	translate_text: string,
+	translate_phone: string,
 	logo_image: {
 		alt: string,
 		url: string,
@@ -40,9 +45,11 @@ export type TSettings = {
 }
 
 export function getHomepageData(data): THomepage {
+	const settingsData: TSettings = transformSettingData(data);
 	let hpData = data.allPrismicHomepage.edges[0].node.data;
 	let blogData = data.allPrismicBlog.nodes;
 	return {
+		settings: settingsData,
 		main: {
 			title: hpData.title.text,
 			sub_title: hpData.sub_title.text,
@@ -110,13 +117,15 @@ export function getHomepageData(data): THomepage {
 }
 
 export type TBlogList = {
+	settings: TSettings,
 	blogPostThumbs: TBlogPostThumb[]
 }
 
 export function getBlogListData(data): TBlogList | null {
 	let blogData = data.allPrismicBlog.edges;
-
+	const settingsData: TSettings = transformSettingData(data);
 	return {
+		settings: settingsData,
 		blogPostThumbs: blogData.map((item) => {
 			return {
 				date: item.node.data.blog_date,
@@ -131,26 +140,41 @@ export function getBlogListData(data): TBlogList | null {
 }
 
 export function transformSettingData(data): TSettings {
-
 	let settings: TSettings;
-	settings = data.allPrismicSettings.edges[0].node.dataRaw;
-	const {lang, type, url} = data.prismicHomepage || {}
-	const alternateLanguages = data.prismicHomepage.alternate_languages
-	const activeDoc = {
-		lang,
-		type,
-		url,
-		alternateLanguages,
+	settings = data.allPrismicSettings.nodes[0].data;
+	let activeDoc = null;
+	if (data.prismicHomepage) {
+		const {lang, type, url} = data.prismicHomepage || {}
+		const alternateLanguages = data.prismicHomepage.alternate_languages;
+		activeDoc = {
+			lang,
+			type,
+			url,
+			alternateLanguages,
+		}
+	} else {
+		const {lang, type, url} = data.prismicBlog || {}
+		const alternateLanguages = data.prismicBlog.alternate_languages;
+		activeDoc = {
+			lang,
+			type,
+			url,
+			alternateLanguages,
+		}
 	}
-
+	console.log('settings', settings)
 	return {
-		email: RichText.asText(settings.email),
-		head_title: RichText.asText(settings.head_title),
+		email: settings.email[0] ? settings.email[0].text : '',
+		head_title: settings.head_title[0] ? settings.head_title[0].text : '',
+		translate_address: settings.translate_address[0] ? settings.translate_address[0].text : '',
+		translate_email: settings.translate_email[0] ? settings.translate_email[0].text : '',
+		translate_text: settings.translate_footer_text1[0] ? settings.translate_footer_text1[0].text : '',
+		translate_phone: settings.translate_phone[0] ? settings.translate_phone[0].text : '',
 		logo_image: {
 			alt: settings.logo_image.alt,
 			url: settings.logo_image.url,
 		},
-		phone: RichText.asText(settings.phone),
+		phone: settings.phone[0] ? settings.phone[0].text : '',
 		address: settings.address,
 		main_menu: settings.main_menu,
 		langs: activeDoc
