@@ -37,7 +37,7 @@ module.exports = {
 			options       : {
 				repositoryName: 'apartmany-astrid',
 				accessToken   : 'MC5ZREFkRlJFQUFDVUFUZE1F.77-9RkpW77-9Qe-_ve-_vQZLBy5k77-9aGwqLDhBSO-_vTMlPe-_vSLvv70ZDe-_vUI',
-				releaseID     : 'YEU2eRAAACMA_Dqq',
+				releaseID     : 'YEUyIBAAACIA_CeH',
 				schemas       : {
 					homepage : require('./custom_types/homepage.json'),
 					blog_post: require('./custom_types/blogPost.json'),
