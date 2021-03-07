@@ -36,8 +36,8 @@ module.exports = {
 			prismicToolbar: true,
 			options       : {
 				repositoryName: 'apartmany-astrid',
-				accessToken   : 'MC5ZREFkSVJFQUFDUUFUZE02.77-977-9U0bvv71zczzvv71v77-9cO-_ve-_vRt4W--_vSjvv73vv71977-977-977-9Su-_ve-_vSxF77-9QA',
-				releaseID     : 'YEE3eRAAACIA6qfZ',
+				accessToken   : 'MC5ZREFkRlJFQUFDVUFUZE1F.77-9RkpW77-9Qe-_ve-_vQZLBy5k77-9aGwqLDhBSO-_vTMlPe-_vSLvv70ZDe-_vUI',
+				releaseID     : 'YEU2eRAAACMA_Dqq',
 				schemas       : {
 					homepage : require('./custom_types/homepage.json'),
 					blog_post: require('./custom_types/blogPost.json'),
