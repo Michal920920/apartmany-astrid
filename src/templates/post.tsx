@@ -41,7 +41,7 @@ const Post = ({data}) => {
 										<li><i className="fal fa-user"/>{values.blog_author}</li>
 										<li><i className="fal fa-calendar-alt"/>{moment(values.blog_date).format('d. M. YYYY')}</li>
 									</ul>
-									<p>{values.blog_anotation ? values.blog_anotation[0].text : ''}</p>
+									<p>{values.blog_anotation.length > 0 ? values.blog_anotation[0].text : ''}</p>
 									<RichText render={textEditor}/>
 								</div>
 							</div>
