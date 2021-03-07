@@ -56,59 +56,5 @@
         "label": "Obrázek"
       }
     }
-  },
-  "Menu": {
-    "main_menu": {
-      "type": "Group",
-      "config": {
-        "fields": {
-          "link_name": {
-            "type": "StructuredText",
-            "config": {
-              "single": "heading4",
-              "label": "Název"
-            }
-          },
-          "link": {
-            "type": "Link",
-            "config": {
-              "label": "Odkaz",
-              "placeholder": "Odkaz, začíná '/' nebo '#'"
-            }
-          }
-        },
-        "label": "Menu"
-      }
-    }
-  },
-  "Překlady": {
-    "translate_phone": {
-      "type": "StructuredText",
-      "config": {
-        "single": "heading5",
-        "label": "Telefon"
-      }
-    },
-    "translate_email": {
-      "type": "StructuredText",
-      "config": {
-        "single": "heading4",
-        "label": "Emailová adresa"
-      }
-    },
-    "translate_address": {
-      "type": "StructuredText",
-      "config": {
-        "single": "heading4",
-        "label": "Adresa"
-      }
-    },
-    "translate_footer_text1": {
-      "type": "StructuredText",
-      "config": {
-        "single": "heading4",
-        "label": "Text v patičce"
-      }
-    }
   }
 }

@@ -22,9 +22,9 @@ const Layout = ({children, data}) => {
 				<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
 				<link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet'/>
 			</Helmet>
-			<Header data={data} activeDocMeta={data.langs}/>
+			<Header/>
 			{children}
-			<Footer data={data}/>
+			<Footer/>
 		</Suspense>
 	)
 

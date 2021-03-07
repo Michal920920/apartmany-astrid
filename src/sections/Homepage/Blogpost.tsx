@@ -3,6 +3,7 @@ import {Link} from "gatsby"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as moment from 'moment'
+import {FormattedMessage} from "gatsby-plugin-intl";
 
 export type TBlogPostThumb = {
 	date: string,
@@ -41,8 +42,8 @@ class Blogpost extends React.Component<{ data: TBlogPostThumb[] }> {
 				<section className="latest-news pt-115 pb-115">
 					<div className="container">
 						<div className="section-title text-center">
-							<span className="title-tag">Blog</span>
-							<h2>Poslední příspěvky</h2>
+							<span className="title-tag"><FormattedMessage id="blog_subtitle"/></span>
+							<h2><FormattedMessage id="blog_title"/></h2>
 						</div>
 						<div className="row justify-content-center mt-50">
 							{data.map((item, i) => (

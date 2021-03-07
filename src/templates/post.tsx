@@ -5,24 +5,30 @@ import {RichText} from "prismic-reactjs";
 import * as moment from "moment";
 import {withPreview} from "gatsby-source-prismic";
 import {transformSettingData, TSettings} from "../models/dataManager/PrismicDataSource";
+import {FormattedMessage, injectIntl} from "gatsby-plugin-intl";
 
 const Post = ({data}) => {
-	if (!data || !data.allPrismicBlog.nodes[0].data.body[0]) {
+	if (!data) {
 		return null;
 	}
-	const settingsData: TSettings = transformSettingData(data);
-	const textEditor = data.allPrismicBlog.nodes[0].data.body[0].primary.text_editor;
-	const values = data.allPrismicBlog.nodes[0].data;
-	const settingValues = data.allPrismicSettings.edges[0].node.data;
+	console.log(data);
+	const settings = data.allPrismicSettings.edges[0].node.data;
+	console.log(settings);
+
+	const settingsData = {
+		head_title: settings.head_title[0] ? settings.head_title[0].text : '',
+	};
+	const textEditor = data.allPrismicBlog.nodes[0].dataRaw.body[0].primary.text_editor;
+	const values = data.allPrismicBlog.nodes[0].dataRaw;
 	return (
 		<Layout data={settingsData}>
-			<section className="breadcrumb-area" style={{backgroundImage: "url(" + settingValues.blog_list_image.url + ")"}}>
+			<section className="breadcrumb-area" style={{backgroundImage: "url(" + settings.blog_list_image.url + ")"}}>
 				<div className="container">
 					<div className="breadcrumb-text">
-						<h2 className="page-title">{settingValues.blog_list_title[0].text}</h2>
+						<h2 className="page-title">{settings.blog_list_title[0].text}</h2>
 						<ul className="breadcrumb-nav">
-							<li><Link to="/">Domů</Link></li>
-							<li className="active">{settingValues.blog_list_title[0].text}</li>
+							<li><Link to="/"><FormattedMessage id="go_home"/></Link></li>
+							<li><Link to="/blog"><FormattedMessage id="blog_button"/></Link></li>
 						</ul>
 					</div>
 				</div>
@@ -38,8 +44,8 @@ const Post = ({data}) => {
 										<li><i className="fal fa-user"/>{values.blog_author}</li>
 										<li><i className="fal fa-calendar-alt"/>{moment(values.blog_date).format('d. M. YYYY')}</li>
 									</ul>
-									<p>{values.blog_anotation[0].text}</p>
-									<RichText render={textEditor}/>
+									{/*<p>{values.blog_anotation[0].text}</p>*/}
+									{/*<div>{textEditor}</div>*/}
 								</div>
 							</div>
 						</div>
@@ -51,17 +57,8 @@ const Post = ({data}) => {
 }
 
 export const pageQuery = graphql`
-    query PostBySlug($slug: String!,$lang: String) {
-        prismicBlog {
-            lang
-            type
-            url,
-            alternate_languages {
-                type
-                lang
-            }
-        },
-        allPrismicSettings(filter: {lang: {eq: $lang}}) {
+    query PostBySlug($slug: String,$language: String) {
+        allPrismicSettings(filter: {lang: {eq: $language}}) {
             edges {
                 node {
                     data {
@@ -71,60 +68,16 @@ export const pageQuery = graphql`
                         blog_list_title {
                             text
                         }
-                    }
-                }
-            },
-            nodes {
-                data {
-                    email {
-                        text
-                    }
-                    head_title {
-                        text
-                    }
-                    logo_image {
-                        alt
-                        url
-                    }
-                    phone {
-                        text
-                    }
-                    address {
-                        type
-                        text
-                        spans {
-                            start
-                            end
-                            type
-                        }
-                    }
-                    main_menu {
-                        link_name {
-                            type
+                        head_title {
                             text
                         }
-                        link {
-                            url
-                        }
-                    }
-                    translate_address {
-                        text
-                    }
-                    translate_email {
-                        text
-                    }
-                    translate_footer_text1 {
-                        text
-                    }
-                    translate_phone {
-                        text
                     }
                 }
             }
         },
         allPrismicBlog(filter: {slugs: {eq: $slug}}) {
             nodes {
-                data {
+                dataRaw {
                     blog_date
                     main_image {
                         url
@@ -145,11 +98,10 @@ export const pageQuery = graphql`
                                 url
                             }
                         }
-                        slice_type
                     }
                 }
             }
         }
     }
 `
-export default withPreview(Post)
+export default injectIntl(Post)

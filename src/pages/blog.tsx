@@ -3,7 +3,7 @@ import {graphql, Link} from "gatsby";
 import Layout from "../components/layout";
 import {getBlogListData} from "../models/dataManager/PrismicDataSource";
 import * as moment from 'moment'
-import {withPreview} from "gatsby-source-prismic";
+import {FormattedMessage, injectIntl} from "gatsby-plugin-intl";
 
 const Blog = ({data}) => {
 	if (!data) {
@@ -18,7 +18,7 @@ const Blog = ({data}) => {
 					<div className="breadcrumb-text">
 						<h2 className="page-title">{settingValues.blog_list_title[0].text}</h2>
 						<ul className="breadcrumb-nav">
-							<li><Link to="/">Domů</Link></li>
+							<li><Link to="/"><FormattedMessage id="go_home"/></Link></li>
 							<li className="active">{settingValues.blog_list_title[0].text}</li>
 						</ul>
 					</div>
@@ -46,7 +46,7 @@ const Blog = ({data}) => {
 												{item.author}
 											</div>
 											<div className="read-more">
-												<Link to={item.url}><i className="far fa-arrow-right"/>Číst dál</Link>
+												<Link to={item.url}><i className="far fa-arrow-right"/><FormattedMessage id="read_more"/></Link>
 											</div>
 										</div>
 									</div>
@@ -60,19 +60,8 @@ const Blog = ({data}) => {
 	)
 }
 export const query = graphql`
-    query BlogListQuery($lang: String) {
-        prismicHomepage{
-            alternate_languages {
-                uid
-                type
-                lang
-                url
-            }
-            lang
-            url
-            type
-        },
-        allPrismicSettings(filter: {lang: {eq: $lang}}) {
+    query BlogListQuery($language: String) {
+        allPrismicSettings(filter: {lang: {eq: $language}}) {
             edges {
                 node {
                     data {
@@ -93,10 +82,6 @@ export const query = graphql`
                     head_title {
                         text
                     }
-                    logo_image {
-                        alt
-                        url
-                    }
                     phone {
                         text
                     }
@@ -109,34 +94,10 @@ export const query = graphql`
                             type
                         }
                     }
-                    main_menu {
-                        link_name {
-                            type
-                            text
-                        }
-                        link {
-                            url
-                        }
-                    }
-                    translate_address {
-                        text
-                    }
-                    translate_email {
-                        text
-                    }
-                    translate_footer_text1 {
-                        text
-                    }
-                    translate_phone {
-                        text
-                    }
-                }
-                alternate_languages {
-                    lang
                 }
             }
         },
-        allPrismicBlog(filter: {lang: {eq: $lang}}) {
+        allPrismicBlog(filter: {lang: {eq: $language}}) {
             edges {
                 node {
                     data {
@@ -159,4 +120,4 @@ export const query = graphql`
     }
 
 `
-export default withPreview(Blog);
+export default injectIntl(Blog);

@@ -1,38 +1,33 @@
 import * as React from 'react';
-import {navigate} from 'gatsby'
-const linkResolver = require('./../utils/linkResolver.js')
+import {changeLocale, IntlContextConsumer} from "gatsby-plugin-intl";
 
-const LangSwitcher = ({activeDocMeta}) => {
-	const currentLang = activeDocMeta.lang
-	const currentLangOption = (
-		<option value={currentLang}>
-			{currentLang.slice(0, 2).toUpperCase()}
-		</option>
-	)
-	const alternateLangOptions = activeDocMeta.alternateLanguages.map((altLang, index) => {
-			return (
-				<option
-					value={linkResolver(altLang)}
-					key={`alt-lang-${index}`}
-				>
-					{altLang.lang.slice(0, 2).toUpperCase()}
-				</option>
-			)
-		}
-	)
-	const handleLangChange = (event) => {
-		navigate(event.target.value)
-	}
+const LangSwitcher = () => {
 
+	// const languageName = {
+	// 	en: "English",
+	// 	cz: "Čeština",
+	// 	de: "Deutsch",
+	// }
 	return (
-		<div className="language-switcher">
-			<select
-				value={currentLang}
-				onChange={handleLangChange}
-			>
-				{currentLangOption}
-				{alternateLangOptions}
-			</select>
+		<div>
+			<IntlContextConsumer>
+				{({languages, language: currentLocale}) =>
+					languages.map(language => (
+						<a
+							key={language}
+							onClick={() => changeLocale(language)}
+							style={{
+								color: currentLocale === language ? `black` : `blue`,
+								margin: 10,
+								textDecoration: `underline`,
+								cursor: `pointer`,
+							}}
+						>
+							{language}
+						</a>
+					))
+				}
+			</IntlContextConsumer>
 		</div>
 	)
 }

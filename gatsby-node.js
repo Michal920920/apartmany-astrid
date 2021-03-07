@@ -1,59 +1,26 @@
 const path = require("path")
-const {defaultLanguage} = require("./prismic-configuration");
-
 exports.createPages = async function ({actions, graphql}) {
-	const {data} = await graphql(`
-{
+	const {createPage} = actions
+	const result = await graphql(`
+	{
   allPrismicBlog {
- totalCount
-    nodes {
-      type
-      url
-      lang
-      slugs
-    }
-  }
-  allPrismicHomepage {
-    nodes {
-        url
-        type
+    edges {
+      node {
         lang
+        slugs
+        type
       }
-  }
-  allPrismicSettings {
-    nodes {
-      url
-      lang
-      type
     }
   }
-}
-
+	}
   `);
-	data.allPrismicHomepage.nodes.forEach((page) => {
-		actions.createPage({
-			path     : page.url,
-			component: path.resolve(__dirname, 'src/pages/index.tsx'),
-			context  : {...page},
-		})
-	});
-	data.allPrismicSettings.nodes.forEach((page) => {
-		actions.createPage({
-			path     : '/blog' + (page.lang === defaultLanguage ? '' : `/${page.lang}`),
-			component: path.resolve(__dirname, 'src/templates/blog.tsx'),
-			context  : {
-				lang: page.lang,
-			},
-		})
-	});
-
-	data.allPrismicBlog.nodes.forEach(page => {
-		actions.createPage({
-			path     : page.url,
+	result.data.allPrismicBlog.edges.forEach(edge => {
+		createPage({
+			path     : `blog/${edge.node.slugs[0]}`,
 			component: path.resolve(`src/templates/post.tsx`),
 			context  : {
-				slug: page.slugs[0],
-				lang: page.lang,
+				lang: edge.node.lang,
+				slug: edge.node.slugs[0],
 			},
 		});
 	})

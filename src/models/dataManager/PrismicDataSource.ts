@@ -1,12 +1,10 @@
 import {RichText, RichTextBlock} from 'prismic-reactjs'
-import {graphql, useStaticQuery} from "gatsby";
 import {TAbout} from "../../sections/Homepage/About";
 import {TMain} from "../../sections/Homepage/Banner";
 import {TApartments} from "../../sections/Homepage/Apartments";
 import {TBlogPostThumb} from "../../sections/Homepage/Blogpost";
 import {TAwards} from "../../sections/Homepage/Awards";
 
-var PrismicDOM = require('prismic-dom');
 
 export type THomepage = {
 	settings: TSettings,
@@ -30,18 +28,8 @@ export type TFeaturesItems = {
 export type TSettings = {
 	email: string,
 	head_title: string,
-	translate_address: string,
-	translate_email: string,
-	translate_text: string,
-	translate_phone: string,
-	logo_image: {
-		alt: string,
-		url: string,
-	},
 	address: RichTextBlock[],
-	main_menu: any,
 	phone: string,
-	langs: any
 }
 
 export function getHomepageData(data): THomepage {
@@ -142,42 +130,11 @@ export function getBlogListData(data): TBlogList | null {
 export function transformSettingData(data): TSettings {
 	let settings: TSettings;
 	settings = data.allPrismicSettings.nodes[0].data;
-	let activeDoc = null;
-	if (data.prismicHomepage) {
-		const {lang, type, url} = data.prismicHomepage || {}
-		const alternateLanguages = data.prismicHomepage.alternate_languages;
-		activeDoc = {
-			lang,
-			type,
-			url,
-			alternateLanguages,
-		}
-	} else {
-		const {lang, type, url} = data.prismicBlog || {}
-		const alternateLanguages = data.prismicBlog.alternate_languages;
-		activeDoc = {
-			lang,
-			type,
-			url,
-			alternateLanguages,
-		}
-	}
-	console.log('settings', settings)
 	return {
 		email: settings.email[0] ? settings.email[0].text : '',
 		head_title: settings.head_title[0] ? settings.head_title[0].text : '',
-		translate_address: settings.translate_address[0] ? settings.translate_address[0].text : '',
-		translate_email: settings.translate_email[0] ? settings.translate_email[0].text : '',
-		translate_text: settings.translate_footer_text1[0] ? settings.translate_footer_text1[0].text : '',
-		translate_phone: settings.translate_phone[0] ? settings.translate_phone[0].text : '',
-		logo_image: {
-			alt: settings.logo_image.alt,
-			url: settings.logo_image.url,
-		},
 		phone: settings.phone[0] ? settings.phone[0].text : '',
 		address: settings.address,
-		main_menu: settings.main_menu,
-		langs: activeDoc
 	};
 }
 
