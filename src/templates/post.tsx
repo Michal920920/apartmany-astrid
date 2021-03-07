@@ -3,22 +3,19 @@ import {graphql, Link} from "gatsby";
 import Layout from "../components/layout";
 import {RichText} from "prismic-reactjs";
 import * as moment from "moment";
-import {withPreview} from "gatsby-source-prismic";
-import {transformSettingData, TSettings} from "../models/dataManager/PrismicDataSource";
 import {FormattedMessage, injectIntl} from "gatsby-plugin-intl";
 
 const Post = ({data}) => {
 	if (!data) {
 		return null;
 	}
-	console.log(data);
 	const settings = data.allPrismicSettings.edges[0].node.data;
-	console.log(settings);
 
 	const settingsData = {
 		head_title: settings.head_title[0] ? settings.head_title[0].text : '',
 	};
-	const textEditor = data.allPrismicBlog.nodes[0].dataRaw.body[0].primary.text_editor;
+	const textEditor = data.allPrismicBlog.nodes[0].dataRaw.blog_content;
+	console.log(data.allPrismicBlog);
 	const values = data.allPrismicBlog.nodes[0].dataRaw;
 	return (
 		<Layout data={settingsData}>
@@ -44,8 +41,8 @@ const Post = ({data}) => {
 										<li><i className="fal fa-user"/>{values.blog_author}</li>
 										<li><i className="fal fa-calendar-alt"/>{moment(values.blog_date).format('d. M. YYYY')}</li>
 									</ul>
-									{/*<p>{values.blog_anotation[0].text}</p>*/}
-									{/*<div>{textEditor}</div>*/}
+									<p>{values.blog_anotation ? values.blog_anotation[0].text : ''}</p>
+									<RichText render={textEditor}/>
 								</div>
 							</div>
 						</div>
@@ -90,14 +87,14 @@ export const pageQuery = graphql`
                     blog_title {
                         text
                     }
-                    body {
-                        primary {
-                            text_editor {
-                                text
-                                type
-                                url
-                            }
+                    blog_content {
+                        spans {
+                            end
+                            start
+                            type
                         }
+                        text
+                        type
                     }
                 }
             }

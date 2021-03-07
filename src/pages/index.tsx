@@ -23,7 +23,6 @@ const Index = ({data, intl}) => {
 	if (!data) {
 		return null;
 	}
-	console.log(intl.locale);
 	const Homepage = React.lazy(() => import("../sections/Homepage"));
 	const homeData = getHomepageData(data);
 

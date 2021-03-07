@@ -40,7 +40,6 @@ export const Footer = () => {
 		`
 	);
 	const settings = data.allPrismicSettings.nodes[0].dataRaw;
-	console.log(settings);
 	data = {
 		email: settings.email[0] ? settings.email[0].text : '',
 		phone: settings.phone[0] ? settings.phone[0].text : '',
