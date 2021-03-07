@@ -3,27 +3,25 @@ import {changeLocale, IntlContextConsumer} from "gatsby-plugin-intl";
 
 const LangSwitcher = () => {
 
-	// const languageName = {
-	// 	en: "English",
-	// 	cz: "Čeština",
-	// 	de: "Deutsch",
-	// }
+	const languageName = [];
+	languageName['cs-cz'] = 'CZ';
+	languageName['en-gb'] = 'EN';
+	languageName['de-de'] = 'DE';
 	return (
-		<div>
+		<div className="lang-switcher">
 			<IntlContextConsumer>
 				{({languages, language: currentLocale}) =>
 					languages.map(language => (
 						<a
+							className={currentLocale === language ? 'active' : ''}
 							key={language}
 							onClick={() => changeLocale(language)}
 							style={{
-								color: currentLocale === language ? `black` : `blue`,
 								margin: 10,
-								textDecoration: `underline`,
 								cursor: `pointer`,
 							}}
 						>
-							{language}
+							{languageName[language]}
 						</a>
 					))
 				}

@@ -125,6 +125,9 @@ export class Header extends React.Component<any, State> {
 													<h5 className="title">{data.email[0].text}</h5>
 												</a>
 											</div>
+											<div className="switcher-mobile">
+												<LangSwitcher/>
+											</div>
 										</div>
 									</div>
 									}
@@ -132,7 +135,7 @@ export class Header extends React.Component<any, State> {
 								<div className="site-logo">
 									<Link to={'/'}><img src={data.logo_image.url} alt={data.logo_image.alt}/></Link>
 								</div>
-								<div className={`nav-push-item ${classNamess}`}>
+								<div className={`nav-push-item switcher-desktop ${classNamess}`}>
 									<LangSwitcher/>
 									<div className="header-info d-lg-flex align-items-center">
 										<div className="item">

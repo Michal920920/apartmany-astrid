@@ -10,22 +10,50 @@ body
 		margin-top: 140px
 		padding: 0 24px
 
-.lang-switcher
-	display: flex
-	justify-content: flex-end
-	align-items: center
+.nav-push-item
 	position: relative
-	bottom: 10px
 
-	li
-		cursor: pointer
-		margin-right: 4px
-		font-size: 15px
+.switcher-mobile
+	.lang-switcher
+		display: flex
+		justify-content: flex-end
+		align-items: center
 
-		&:not(:last-child):after
-			content: '|'
-			margin-left: 4px
+		a
+			color: white
+			font-weight: 300
 
-		&.active
-			font-weight: 600
+			&.active
+				color: black
+				font-weight: 500
+
+.switcher-desktop
+	.lang-switcher
+		display: flex
+		justify-content: flex-end
+		align-items: center
+		position: absolute
+		right: 0
+		top: -38px
+		height: 16px
+
+		a
+			color: #4c6275
+			font-weight: 300
+
+			&.active
+				color: black
+				font-weight: 500
+
+		li
+			cursor: pointer
+			margin-right: 4px
+			font-size: 15px
+
+			&:not(:last-child):after
+				content: '|'
+				margin-left: 4px
+
+			&.active
+				font-weight: 600
 

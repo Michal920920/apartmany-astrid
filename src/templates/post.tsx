@@ -93,6 +93,7 @@ export const pageQuery = graphql`
                             start
                             type
                         }
+                        url
                         text
                         type
                     }
