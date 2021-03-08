@@ -11,6 +11,7 @@ import {Marker} from "react-mapbox-gl/lib-esm";
 import {FormattedMessage} from "gatsby-plugin-intl"
 import {graphql, useStaticQuery} from "gatsby";
 import * as MapboxGl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const Footer = () => {
 	let data = useStaticQuery(
@@ -50,6 +51,10 @@ export const Footer = () => {
 		accessToken:
 			'pk.eyJ1IjoibWljaGFsOTIiLCJhIjoiY2tobDQxcWY0MDM3OTMxcm41MGxlNjZ0cSJ9.7By8mjnPT5zSKeoc8nUDWA'
 	});
+
+	const onLoaded = (map: MapboxGl.Map) => {
+		map.resize();
+	}
 	return (
 		<>
 			<Backtotop/>
@@ -98,9 +103,11 @@ export const Footer = () => {
 					center={[16.632, 48.802]}
 					pitch={[50]}
 					zoom={[15]}
-					onStyleLoad={(map) => {
-						setTimeout(() => map.resize(), 10)
+					containerStyle={{
+						height: "calc(100vh - 130px)",
+						width: "100%"
 					}}
+					onStyleLoad={(map) => onLoaded(map)}
 				>
 					<Marker coordinates={[16.63145, 48.802]}>
 						<img src={pointer}/>
