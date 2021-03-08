@@ -50,9 +50,6 @@ export const Footer = () => {
 		accessToken:
 			'pk.eyJ1IjoibWljaGFsOTIiLCJhIjoiY2tobDQxcWY0MDM3OTMxcm41MGxlNjZ0cSJ9.7By8mjnPT5zSKeoc8nUDWA'
 	});
-	const onLoaded = (map: MapboxGl.Map) => {
-		map.resize();
-	}
 	return (
 		<>
 			<Backtotop/>
@@ -95,14 +92,15 @@ export const Footer = () => {
 						</div>
 					</div>
 				</div>
-
 				<Map
 					style="mapbox://styles/michal92/ckhl4u282095t19lwp2ay3hqg"
 					className="contact-maps"
 					center={[16.632, 48.802]}
 					pitch={[50]}
 					zoom={[15]}
-					onStyleLoad={(map) => onLoaded(map)}
+					onStyleLoad={(map) => {
+						setTimeout(() => map.resize(), 10)
+					}}
 				>
 					<Marker coordinates={[16.63145, 48.802]}>
 						<img src={pointer}/>
