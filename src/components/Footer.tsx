@@ -53,7 +53,9 @@ export const Footer = () => {
 	});
 
 	const onLoaded = (map: MapboxGl.Map) => {
-		map.resize();
+		setTimeout(() => {
+			map.resize();
+		}, 3000);
 	}
 	return (
 		<>
@@ -122,7 +124,7 @@ export const Footer = () => {
 							<div className="col-lg-6 col-md-7 order-1 order-md-2">
 								<div className="footer-menu text-center text-md-right">
 									<ul>
-										<li><p>vytvořil Michal Buráň</p></li>
+										<li><a href="mailto:michal92.mb@gmail.com">vytvořil Michal Buráň</a></li>
 									</ul>
 								</div>
 							</div>
