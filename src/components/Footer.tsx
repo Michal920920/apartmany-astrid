@@ -47,10 +47,6 @@ export const Footer = () => {
 		address: settings.address,
 	}
 
-	let canvas = document.getElementsByClassName("mapboxgl-canvas");
-	if (canvas) {
-		canvas[0].style.width = document.body.clientWidth
-	}
 	const Map = ReactMapboxGl({
 		accessToken:
 			'pk.eyJ1IjoibWljaGFsOTIiLCJhIjoiY2tobDQxcWY0MDM3OTMxcm41MGxlNjZ0cSJ9.7By8mjnPT5zSKeoc8nUDWA'
@@ -104,6 +100,9 @@ export const Footer = () => {
 					center={[16.632, 48.802]}
 					pitch={[50]}
 					zoom={[16]}
+					onStyleLoad={(map) => {
+						map.resize();
+					}}
 				>
 					<Marker coordinates={[16.63145, 48.802]}>
 						<img src={pointer}/>
