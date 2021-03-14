@@ -9,8 +9,7 @@ import pointer from './../assets/img/icon/pointer.png';
 import {FormattedMessage} from "gatsby-plugin-intl"
 import {graphql, useStaticQuery} from "gatsby";
 import 'mapbox-gl/dist/mapbox-gl.css';
-import MapboxMap from 'react-mapbox-wrapper';
-import Marker from "react-mapbox-gl";
+import Marker from 'react-mapbox-wrapper';
 
 export const Footer = () => {
 	let data = useStaticQuery(
@@ -91,7 +90,7 @@ export const Footer = () => {
 					</div>
 				</div>
 				<div style={{height: 700, width: '100%'}}>
-					<MapboxMap
+					<Marker
 						accessToken="pk.eyJ1IjoibWljaGFsOTIiLCJhIjoiY2tobDNjY2xwMDF0MzJ3cXFrdmpnd20xYSJ9.AWM4zvce3rG5oJFem_URmQ"
 						coordinates={{lat: 48.802, lng: 16.63145}}
 						mapboxStyle={"mapbox://styles/michal92/ckhl4u282095t19lwp2ay3hqg"}
