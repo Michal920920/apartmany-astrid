@@ -48,7 +48,7 @@ export const Footer = () => {
 	}
 	const Map = ReactMapboxGl({
 		accessToken:
-			'pk.eyJ1IjoibWljaGFsOTIiLCJhIjoiY2tobDQxcWY0MDM3OTMxcm41MGxlNjZ0cSJ9.7By8mjnPT5zSKeoc8nUDWA'
+			'pk.eyJ1IjoibWljaGFsOTIiLCJhIjoiY2tobDNjY2xwMDF0MzJ3cXFrdmpnd20xYSJ9.AWM4zvce3rG5oJFem_URmQ'
 	});
 
 	return (
