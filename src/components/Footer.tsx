@@ -1,16 +1,16 @@
 import * as React from 'react';
 import Backtotop from './Backtotop';
-import ReactMapboxGl, {Layer, Feature} from 'react-mapbox-gl';
 import {RichText} from 'prismic-reactjs';
 import * as moment from 'moment'
 import call_ico from './../assets/img/icon/call.svg';
 import email_ico from './../assets/img/icon/email.svg';
 import home_ico from './../assets/img/icon/home.svg';
 import pointer from './../assets/img/icon/pointer.png';
-import {Marker} from "react-mapbox-gl/lib-esm";
 import {FormattedMessage} from "gatsby-plugin-intl"
 import {graphql, useStaticQuery} from "gatsby";
 import 'mapbox-gl/dist/mapbox-gl.css';
+import MapboxMap from 'react-mapbox-wrapper';
+import Marker from "react-mapbox-gl";
 
 export const Footer = () => {
 	let data = useStaticQuery(
@@ -40,17 +40,13 @@ export const Footer = () => {
 
 		`
 	);
+
 	const settings = data.allPrismicSettings.nodes[0].dataRaw;
 	data = {
 		email: settings.email[0] ? settings.email[0].text : '',
 		phone: settings.phone[0] ? settings.phone[0].text : '',
 		address: settings.address,
 	}
-
-	const Map = ReactMapboxGl({
-		accessToken:
-			'pk.eyJ1IjoibWljaGFsOTIiLCJhIjoiY2tobDQxcWY0MDM3OTMxcm41MGxlNjZ0cSJ9.7By8mjnPT5zSKeoc8nUDWA'
-	});
 
 	return (
 		<>
@@ -94,20 +90,31 @@ export const Footer = () => {
 						</div>
 					</div>
 				</div>
-				<Map
-					style="mapbox://styles/michal92/ckhl4u282095t19lwp2ay3hqg"
-					className="contact-maps"
-					center={[16.632, 48.802]}
-					pitch={[50]}
-					zoom={[16]}
-					onStyleLoad={(map) => {
-						map.resize();
-					}}
-				>
-					<Marker coordinates={[16.63145, 48.802]}>
-						<img src={pointer}/>
-					</Marker>
-				</Map>
+				<div style={{height: 700, width: '100%'}}>
+					<MapboxMap
+						accessToken="pk.eyJ1IjoibWljaGFsOTIiLCJhIjoiY2tobDNjY2xwMDF0MzJ3cXFrdmpnd20xYSJ9.AWM4zvce3rG5oJFem_URmQ"
+						coordinates={{lat: 48.802, lng: 16.63145}}
+						mapboxStyle={"mapbox://styles/michal92/ckhl4u282095t19lwp2ay3hqg"}
+						zoom={16}
+						pitch={40}
+						onLoad={(map) => {
+							map.resize()
+						}}
+					/>
+				</div>
+				{/*<Map*/}
+				{/*	style="mapbox://styles/michal92/ckhl4u282095t19lwp2ay3hqg"*/}
+				{/*	className="contact-maps"*/}
+				{/*	center={[16.632, 48.802]}*/}
+				{/*	pitch={[50]}*/}
+				{/*	zoom={[16]}*/}
+				{/*	onStyleLoad={(map) => {*/}
+				{/*	}}*/}
+				{/*>*/}
+				{/*	<Marker coordinates={[16.63145, 48.802]}>*/}
+				{/*		<img src={pointer}/>*/}
+				{/*	</Marker>*/}
+				{/*</Map>*/}
 				<div className="copyright-area pt-30 pb-30">
 					<div className="container">
 						<div className="row align-items-center">
