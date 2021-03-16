@@ -84,7 +84,7 @@ class About extends React.Component<{ data: TAbout }> {
 					</div>
 					<div className="about-right-bottom">
 						<div className="about-bottom-img">
-							<img src={data.background_img.url} alt={data.background_img.alt}/>
+							<img height={900} src={data.background_img.url} alt={data.background_img.alt}/>
 						</div>
 					</div>
 				</section>
