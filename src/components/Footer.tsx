@@ -94,7 +94,7 @@ export const Footer = () => {
 					</div>
 				</div>
 				<Map
-					style="mapbox://styles/michal92/ckhl4u282095t19lwp2ay3hqg"
+					style="mapbox://styles/mapbox/light-v10"
 					className="contact-maps"
 					center={[16.632, 48.802]}
 					pitch={[50]}
