@@ -15,11 +15,11 @@ export default class Homepage extends React.Component<{ data: THomepage }> {
 		return (
 			<>
 				<Banner data={main}/>
+				<Blogpost data={blogPostThumbs}/>
 				<About data={about}/>
 				<Facilities data={apartments}/>
 				<Awards data={awards}/>
 				<Features data={features}/>
-				<Blogpost data={blogPostThumbs}/>
 			</>
 		)
 	}

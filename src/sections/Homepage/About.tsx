@@ -31,7 +31,7 @@ class About extends React.Component<{ data: TAbout }> {
 			return (
 				<section className={`about-section ${window.innerWidth > 991 ? 'pt-115 pb-115 mt-100' : 'pt-60 pb-60 mt-30'}`} id="about">
 					<div className="container">
-						<div className="row align-items-center justify-content-center">
+						<div className="row justify-content-center">
 							<div className="col-lg-6 col-md-10" data-aos="fade-right" data-aos-offset="80">
 								<ResponsiveMasonry columnsCountBreakPoints={{350: 1, 750: 2}}>
 									<Masonry gutter="10px" className="col about-features-boxes fetaure-masonary">
@@ -75,10 +75,9 @@ class About extends React.Component<{ data: TAbout }> {
 										<span className="title-tag">{data.sub_title}</span>
 										<h2>{data.title}</h2>
 									</div>
-									<p>
+									<p style={{color: 'black'}}>
 										{data.text}
 									</p>
-									{/*<a href="#footer" className="main-btn btn-filled mt-40"> Zavolejte</a>*/}
 								</div>
 							</div>
 						</div>
