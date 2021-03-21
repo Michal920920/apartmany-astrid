@@ -11,6 +11,7 @@ import {Marker} from "react-mapbox-gl/lib-esm";
 import {FormattedMessage} from "gatsby-plugin-intl"
 import {graphql, useStaticQuery} from "gatsby";
 import 'mapbox-gl/dist/mapbox-gl.css';
+import Iframe from 'react-iframe'
 
 export const Footer = () => {
 	let data = useStaticQuery(
@@ -93,20 +94,14 @@ export const Footer = () => {
 						</div>
 					</div>
 				</div>
-				<Map
-					style="mapbox://styles/mapbox/light-v10"
-					className="contact-maps"
-					center={[16.632, 48.802]}
-					pitch={[50]}
-					zoom={[16]}
-					onStyleLoad={(map) => {
-						map.resize();
-					}}
-				>
-					<Marker coordinates={[16.63145, 48.802]}>
-						<img src={pointer}/>
-					</Marker>
-				</Map>
+				{/*<iframe style={{border:'none'}} src="https://frame.mapy.cz/s/gobekagoco" width="1920" height="700" frameBorder="0"></iframe>*/}
+				<Iframe url="https://frame.mapy.cz/s/gobekagoco"
+				        width="100%"
+				        height="700px"
+				        id="myId"
+				        className="myClassname"
+				        styles={{border: 'none'}}
+				        position="relative"/>
 				<div className="copyright-area pt-30 pb-30">
 					<div className="container">
 						<div className="row align-items-center">
