@@ -75,7 +75,7 @@ class About extends React.Component<{ data: TAbout }> {
 										<span className="title-tag">{data.sub_title}</span>
 										<h2>{data.title}</h2>
 									</div>
-									<p style={{color: 'black'}}>
+									<p style={{color: '#080808', fontSize: '16px'}}>
 										{data.text}
 									</p>
 								</div>
