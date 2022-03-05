@@ -10,12 +10,11 @@ const Post = ({data}) => {
 		return null;
 	}
 	const settings = data.allPrismicSettings.edges[0].node.data;
-
 	const settingsData = {
 		head_title: settings.head_title[0] ? settings.head_title[0].text : '',
 	};
-	const textEditor = data.allPrismicBlog.nodes[0].dataRaw.blog_content;
-	console.log(data.allPrismicBlog);
+	const text = data.allPrismicBlog.nodes[0].dataString;
+	const textEditor = JSON.parse(text).blog_content;
 	const values = data.allPrismicBlog.nodes[0].dataRaw;
 	return (
 		<Layout data={settingsData}>
@@ -74,6 +73,7 @@ export const pageQuery = graphql`
         },
         allPrismicBlog(filter: {slugs: {eq: $slug}}) {
             nodes {
+	            dataString
                 dataRaw {
                     blog_date
                     main_image {
@@ -88,11 +88,6 @@ export const pageQuery = graphql`
                         text
                     }
                     blog_content {
-                        spans {
-                            end
-                            start
-                            type
-                        }
                         url
                         text
                         type
