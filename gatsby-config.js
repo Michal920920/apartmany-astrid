@@ -18,6 +18,8 @@ module.exports = {
 	plugins     : [
 		`gatsby-plugin-sass`,
 		`gatsby-plugin-gatsby-cloud`,
+		`gatsby-plugin-netlify`,
+
 		{
 			resolve: `gatsby-plugin-intl`,
 			options: {
